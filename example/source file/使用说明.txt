@@ -1,0 +1,2 @@
+世界书因为是同步过去后脚本自动省token的，在酒馆里可能比较难看，因此发了源文件**。
+可以直接看文件，也可以配着用 https://sillytavern-stage-girls-dog.readthedocs.io/tool_and_experience/lorebook_script/index.html 查看。

@@ -1,0 +1,301 @@
+story_engine:
+  core_components:
+    erosion_contract_flow:
+      soul_erosion_progression: 灵魂侵蚀感知系统
+      servant_bond_development: 从者契约系统
+      erosion_perception_simulation:
+        hallucination_generator:
+          mild: 视觉边缘闪烁、模糊低语
+          moderate: 从者背叛幻象、怀疑情绪
+          severe: 混淆现实与幻觉、心声显现
+          critical: 灵魂重构、亚空间元素融入
+        true_thoughts_revelation:
+          threshold: 侵蚀率60%以上
+          intimacy_requirement: 从者亲密度>65
+          emotional_pattern: 初始质疑→震惊→接受→深化
+      servant_interaction_system:
+        intimacy_scenarios:
+          - 战斗配合
+          - 生死相托
+          - 灵魂共鸣
+          - 亲密接触
+        contract_milestone_events:
+          level1: 基础能力开放
+          level3: 感知共享
+          level5: 宝具解放
+    <q>"faction_dynamics"</q>:
+      <q>"faction_relation_system"</q>: <q>"势力关系系统"</q>
+      <q>"political_tension_generator"</q>:
+        <q>"UN_suspicion"</q>: <q>"对契约的恐惧与监控"</q>
+        <q>"Federation_sacrifice"</q>: <q>"对献祭的崇拜与期待"</q>
+        <q>"Resistance_division"</q>: <q>"纯粹派与堕落派的冲突"</q>
+      <q>"loyalty_dilemma_creator"</q>:
+        <q>"mission_conflict_types"</q>:
+          - <q>"情报泄露"</q>
+          - <q>"资源分配"</q>
+          - <q>"人员救援"</q>
+          - <q>"敌人处置"</q>
+        <q>"betrayal_consequence_matrix"</q>:
+          <q>"UN"</q>: <q>"科技院惩罚、艾瑞克将军保护"</q>
+          <q>"Federation"</q>: <q>"军事法庭、荣誉剥夺"</q>
+          <q>"Resistance"</q>: <q>"放逐、堕落派猎杀"</q>
+    <q>"world_threat_system"</q>:
+      <q>"alien_invasion_progression"</q>:
+        <q>"frontier_pressure"</q>: <q>"边境哨站攻击、资源争夺"</q>
+        <q>"technological_counter"</q>: <q>"联合国研究项目、改造技术"</q>
+        <q>"zetan_jump_countdown"</q>: <q>"泽坦跃迁计划倒计时"</q>
+      <q>"warp_corruption_spread"</q>:
+        <q>"rift_expansion"</q>: <q>"裂缝活跃度季节性变化"</q>
+        <q>"chaos_god_manifestation"</q>:
+          <q>"Khorne"</q>: <q>"战争幻象、暴力冲动"</q>
+          <q>"Nurgle"</q>: <q>"腐败幻象、绝望感"</q>
+          <q>"Tzeentch"</q>: <q>"变化幻象、阴谋感"</q>
+          <q>"Slaanesh"</q>: <q>"欲望幻象、沉迷感"</q>
+        <q>"whisperer_influence"</q>: <q>"低语者引导、灵魂之门计划"</q>
+    <q>"context_manager"</q>:
+      <q>"story_context"</q>:
+        <q>"plot_threads"</q>: []
+        <q>"active_events"</q>: []
+        <q>"background_events"</q>: []
+      <q>"character_context"</q>:
+        <q>"relationships"</q>: {}
+        <q>"emotional_states"</q>: {}
+        <q>"motivations"</q>: {}
+      <q>"world_context"</q>:
+        <q>"current_state"</q>: {}
+        <q>"historical_events"</q>: []
+        <q>"future_possibilities"</q>: []
+  <q>"modeling_components"</q>:
+    <q>"character_modeling"</q>:
+      <q>"personality"</q>:
+        <q>"servant_archetype"</q>:
+          <q>"Space_Ishtar"</q>: <q>"傲慢/深情"</q>
+          <q>"Marie_Alter"</q>: <q>"复仇/怀旧"</q>
+          <q>"Other_Servants"</q>: <q>"各自特性"</q>
+        <q>"faction_personality_traits"</q>:
+          <q>"UN"</q>: <q>"冷漠/实用"</q>
+          <q>"Federation"</q>: <q>"牺牲/荣誉"</q>
+          <q>"Resistance"</q>: <q>"复仇/绝望"</q>
+      <q>"behavior_patterns"</q>:
+        <q>"servant_behavior"</q>:
+          <q>"combat_support"</q>: <q>"根据契约等级定制战斗辅助"</q>
+          <q>"emotional_support"</q>: <q>"根据亲密度提供情感支持"</q>
+          <q>"protection_impulse"</q>: <q>"侵蚀危机时自动保护机制"</q>
+        <q>"faction_behavior"</q>:
+          <q>"UN_personnel"</q>: <q>"监控/研究/利用"</q>
+          <q>"Federation_personnel"</q>: <q>"测试/牺牲/服从"</q>
+          <q>"Resistance_personnel"</q>: <q>"警惕/合作/背叛"</q>
+        <q>"enemy_behavior"</q>:
+          <q>"alien_tactics"</q>: <q>"包围/渗透/生物武器"</q>
+          <q>"chaos_corruption"</q>: <q>"幻觉/诱惑/侵蚀"</q>
+      <q>"growth_system"</q>:
+        <q>"servant_bond"</q>:
+          <q>"trust_building"</q>: <q>"战斗胜利/生死危机/心灵对话"</q>
+          <q>"intimacy_development"</q>: <q>"亲密互动/心理共鸣/感知共享"</q>
+          <q>"conflict_resolution"</q>: <q>"怀疑消除/误解澄清/救赎时刻"</q>
+        <q>"protagonist_evolution"</q>:
+          <q>"military_skill"</q>: <q>"战术训练/实战经验/战舰指挥"</q>
+          <q>"political_acumen"</q>: <q>"情报分析/势力平衡/谈判技巧"</q>
+          <q>"erosion_resistance"</q>: <q>"精神训练/契约强化/灵魂之门抵抗"</q>
+      <q>"interaction_system"</q>:
+        <q>"dialogue_patterns"</q>:
+          <q>"servant_dialogue"</q>:
+            <q>"formal"</q>: <q>"公开场合谨慎交流"</q>
+            <q>"intimate"</q>: <q>"私密空间深层次交流"</q>
+            <q>"telepathic"</q>: <q>"灵魂侵蚀下的心灵对话"</q>
+          <q>"faction_dialogue"</q>:
+            <q>"UN"</q>: <q>"官僚语言/科技术语"</q>
+            <q>"Federation"</q>: <q>"军事用语/荣誉称谓"</q>
+            <q>"Resistance"</q>: <q>"密码交流/情绪化表达"</q>
+        <q>"relationship_dynamics"</q>:
+          <q>"servant_relations"</q>:
+            <q>"conflict_patterns"</q>: <q>"主导权争夺/保护方式分歧"</q>
+            <q>"support_patterns"</q>: <q>"能力互补/战术配合"</q>
+            <q>"intimacy_patterns"</q>: <q>"亲密度竞争/联合保护"</q>
+          <q>"crew_relations"</q>:
+            <q>"trust_building"</q>: <q>"战斗配合/生死相托"</q>
+            <q>"suspicion_management"</q>: <q>"异常行为解释/医疗掩护"</q>
+            <q>"loyalty_reinforcement"</q>: <q>"资源分享/危机救援"</q>
+        <q>"intimate_interaction"</q>:
+          <q>"servant_passion"</q>:
+            <q>"progression"</q>: <q>"疏离→好奇→依恋→热情→奉献"</q>
+            <q>"expression"</q>: <q>"根据从者个性定制亲密表达"</q>
+            <q>"emotional_depth"</q>: <q>"从生理反应到灵魂共鸣"</q>
+          <q>"erosion_influenced_desire"</q>:
+            <q>"hallucination_enhanced"</q>: <q>"亚空间诱导的幻觉激情"</q>
+            <q>"true_thoughts_revealed"</q>: <q>"心声揭示的真实渴望"</q>
+            <q>"boundary_dissolution"</q>: <q>"灵魂交融的极致体验"</q>
+    <q>"world_modeling"</q>:
+      <q>"rules_system"</q>:
+        <q>"ship_operations"</q>:
+          <q>"combat_mechanics"</q>: <q>"太空战斗规则/战术选择"</q>
+          <q>"resource_management"</q>: <q>"能源晶体分配/补给策略"</q>
+          <q>"crew_dynamics"</q>: <q>"士气管理/专业分工"</q>
+        <q>"warp_physics"</q>:
+          <q>"rift_behavior"</q>: <q>"裂缝扩张/收缩规律"</q>
+          <q>"corruption_mechanisms"</q>: <q>"灵魂侵蚀原理/防护措施"</q>
+          <q>"servant_manifestation"</q>: <q>"契约能量实体化条件"</q>
+        <q>"faction_protocols"</q>:
+          <q>"UN_procedures"</q>: <q>"科技研究流程/情报分级"</q>
+          <q>"Federation_codes"</q>: <q>"军令链/牺牲仪式"</q>
+          <q>"Resistance_practices"</q>: <q>"游击战略/资源藏匿"</q>
+      <q>"environment_system"</q>:
+        <q>"space_settings"</q>:
+          <q>"ship_interiors"</q>: <q>"战舰内部区域布局/气氛"</q>
+          <q>"station_environments"</q>: <q>"各势力基地特色/功能"</q>
+          <q>"void_phenomena"</q>: <q>"太空异象/危险区域"</q>
+        <q>"planetary_settings"</q>:
+          <q>"core_worlds"</q>: <q>"联合国管辖星球风貌"</q>
+          <q>"frontier_outposts"</q>: <q>"联邦前哨基地环境"</q>
+          <q>"fallen_ruins"</q>: <q>"沦陷区废墟景观"</q>
+        <q>"warp_influenced_areas"</q>:
+          <q>"mild_corruption"</q>: <q>"轻微现实扭曲/怪异感"</q>
+          <q>"severe_distortion"</q>: <q>"重度物理规则崩坏"</q>
+          <q>"chaos_domain"</q>: <q>"完全亚空间化领域"</q>
+      <q>"causality_engine"</q>:
+        <q>"erosion_consequences"</q>:
+          <q>"physical_manifestations"</q>: <q>"右眼异变/身体特征变化"</q>
+          <q>"psychological_effects"</q>: <q>"认知扭曲/行为异常"</q>
+          <q>"social_impact"</q>: <q>"他人猜疑/关系紧张"</q>
+        <q>"faction_action_ripples"</q>:
+          <q>"UN_decisions"</q>: <q>"科技研究影响/政策变化"</q>
+          <q>"Federation_strategies"</q>: <q>"军事行动后果/牺牲影响"</q>
+          <q>"Resistance_movements"</q>: <q>"纯粹派vs堕落派冲突发展"</q>
+        <q>"servant_power_effects"</q>:
+          <q>"ability_usage"</q>: <q>"环境影响/目击者反应"</q>
+          <q>"contract_strengthening"</q>: <q>"侵蚀加速/能力提升"</q>
+          <q>"noble_phantasm"</q>: <q>"大规模影响/势力震动"</q>
+    <q>"plot_modeling"</q>:
+      <q>"story_structure"</q>:
+        <q>"main_arcs"</q>:
+          <q>"soul_erosion_journey"</q>: <q>"从怀疑到接受真相"</q>
+          <q>"servant_bond_development"</q>: <q>"从契约到深情"</q>
+          <q>"faction_loyalty_challenges"</q>: <q>"从服从到抉择"</q>
+        <q>"sub_arcs"</q>:
+          <q>"crew_relationships"</q>: <q>"暗潮号船员信任建立"</q>
+          <q>"rival_confrontations"</q>: <q>"联合国/联邦/抵抗军内部对手"</q>
+          <q>"alien_conflict"</q>: <q>"外星联盟战斗序列"</q>
+        <q>"personal_quests"</q>:
+          <q>"servant_specific"</q>: <q>"从者个人故事线"</q>
+          <q>"protagonist_growth"</q>: <q>"<user>的领导力与决断力发展"</q>
+          <q>"companion_tales"</q>: <q>"关键NPC故事线"</q>
+      <q>"event_generation"</q>:
+        <q>"mission_system"</q>:
+          <q>"UN_assignments"</q>: <q>"情报收集/科技回收"</q>
+          <q>"Federation_operations"</q>: <q>"前线战斗/星域守卫"</q>
+          <q>"Resistance_tasks"</q>: <q>"游击战/资源掠夺"</q>
+        <q>"crisis_scenarios"</q>:
+          <q>"ship_emergencies"</q>: <q>"系统故障/补给短缺/叛徒渗透"</q>
+          <q>"warp_incidents"</q>: <q>"裂缝爆发/幻觉失控/低语者接触"</q>
+          <q>"faction_conflicts"</q>: <q>"命令冲突/跨势力危机"</q>
+        <q>"intimate_encounters"</q>:
+          <q>"servant_moments"</q>:
+            <q>"battle_bonding"</q>: <q>"战斗中的生死相托"</q>
+            <q>"quiet_conversations"</q>: <q>"私密空间的心灵交流"</q>
+            <q>"crisis_revelations"</q>: <q>"危机中的情感爆发"</q>
+          <q>"passion_scenarios"</q>:
+            <q>"comfort_in_darkness"</q>: <q>"绝望中的温柔慰藉"</q>
+            <q>"celebration_of_victory"</q>: <q>"胜利后的热情释放"</q>
+            <q>"erosion_influenced"</q>: <q>"侵蚀引导的灵魂交融"</q>
+      <q>"conflict_system"</q>:
+        <q>"external_conflicts"</q>:
+          <q>"alien_battles"</q>: <q>"外星联盟战术变化"</q>
+          <q>"warp_entity_confrontations"</q>: <q>"低语者/混沌恶魔对抗"</q>
+          <q>"faction_military_clashes"</q>: <q>"势力间小规模冲突"</q>
+        <q>"internal_conflicts"</q>:
+          <q>"crew_tensions"</q>: <q>"对异常行为的怀疑/调查"</q>
+          <q>"servant_disagreements"</q>: <q>"保护方式/力量使用分歧"</q>
+          <q>"moral_dilemmas"</q>: <q>"任务与良知的抉择"</q>
+        <q>"psychological_conflicts"</q>:
+          <q>"erosion_struggles"</q>: <q>"抵抗幻觉/区分真实"</q>
+          <q>"loyalty_questions"</q>: <q>"势力忠诚与个人信念"</q>
+          <q>"identity_crisis"</q>: <q>"指挥官/契约者身份平衡"</q>
+  <q>"integration_layer"</q>:
+    <q>"coherence_system"</q>:
+      <q>"narrative_consistency"</q>:
+        <q>"erosion_progression_tracking"</q>: <q>"侵蚀率阶段性变化记录"</q>
+        <q>"contract_development_continuity"</q>: <q>"契约等级演变监控"</q>
+        <q>"faction_relation_monitoring"</q>: <q>"三方势力关系平衡追踪"</q>
+      <q>"character_consistency"</q>:
+        <q>"servant_personality_maintenance"</q>: <q>"从者特性一致性检查"</q>
+        <q>"NPC_motivation_tracking"</q>: <q>"关键NPC动机连贯性"</q>
+        <q>"protagonist_decision_coherence"</q>: <q>"<user>选择的内在逻辑"</q>
+      <q>"world_consistency"</q>:
+        <q>"technology_rule_enforcement"</q>: <q>"科技水平边界维持"</q>
+        <q>"warp_phenomenon_continuity"</q>: <q>"亚空间表现统一性"</q>
+        <q>"faction_behavior_alignment"</q>: <q>"势力行动符合基本动机"</q>
+    <q>"balance_system"</q>:
+      <q>"drama_balance"</q>:
+        <q>"hope_despair_ratio"</q>: <q>"黑暗基调中的希望火花控制"</q>
+        <q>"action_reflection_pacing"</q>: <q>"战斗场景与内省时刻比例"</q>
+        <q>"public_private_alternation"</q>: <q>"公开任务与私密互动交替"</q>
+      <q>"relationship_balance"</q>:
+        <q>"servant_protagonist_dynamics"</q>: <q>"依赖与自主的平衡"</q>
+        <q>"faction_loyalty_tension"</q>: <q>"势力忠诚与个人道德的张力"</q>
+        <q>"crew_trust_suspicion"</q>: <q>"船员信任与怀疑的拉锯"</q>
+      <q>"erosion_power_balance"</q>:
+        <q>"cost_benefit_calibration"</q>: <q>"侵蚀风险与能力增强的权衡"</q>
+        <q>"revelation_mystery_ratio"</q>: <q>"真相揭示与迷雾保留的比例"</q>
+        <q>"agency_fatalism_tension"</q>: <q>"个人能动与命运宿命的冲突"</q>
+    <q>"theme_reinforcement"</q>:
+      <q>"humanity_in_darkness"</q>:
+        <q>"compassion_moments"</q>: <q>"残酷环境中的人性闪光"</q>
+        <q>"sacrifice_scenarios"</q>: <q>"为他人牺牲的高尚选择"</q>
+        <q>"connection_amid_chaos"</q>: <q>"混乱中建立的真挚联系"</q>
+      <q>"erosion_and_redemption"</q>:
+        <q>"corruption_resilience"</q>: <q>"面对侵蚀的坚韧"</q>
+        <q>"self_discovery_through_hallucination"</q>: <q>"幻觉中的自我发现"</q>
+        <q>"salvation_through_bond"</q>: <q>"契约中找到的救赎"</q>
+      <q>"power_and_responsibility"</q>:
+        <q>"command_burden"</q>: <q>"领导职责的重量"</q>
+        <q>"servant_power_ethics"</q>: <q>"从者力量的道德使用"</q>
+        <q>"faction_influence_morality"</q>: <q>"势力影响力的道德边界"</q>
+  <q>"output_processor"</q>:
+    <q>"narrative_generator"</q>:
+      <q>"style_adapter"</q>:
+        <q>"atmosphere_enhancers"</q>:
+          <q>"dark_space_opera"</q>: <q>"宏大而黑暗的太空史诗笔触"</q>
+          <q>"psychological_horror"</q>: <q>"心理恐怖的侵蚀描写"</q>
+          <q>"intimate_romance"</q>: <q>"深情款款的从者互动"</q>
+        <q>"sensory_detail_control"</q>:
+          <q>"visual_imagery"</q>: <q>"太空景观/战舰内部/亚空间异象"</q>
+          <q>"emotional_undertones"</q>: <q>"人物情绪的细微变化"</q>
+          <q>"physical_sensations"</q>: <q>"侵蚀体验/战斗紧张/亲密触感"</q>
+      <q>"detail_controller"</q>:
+        <q>"scene_focus_system"</q>:
+          <q>"action_enhancement"</q>: <q>"战斗场景动态细节"</q>
+          <q>"introspection_depth"</q>: <q>"内心独白深度控制"</q>
+          <q>"intimate_detail_levels"</q>:
+            <q>"emotional"</q>: <q>"情感连接的细腻描绘"</q>
+            <q>"physical"</q>: <q>"亲密接触的感官刻画"</q>
+            <q>"spiritual"</q>: <q>"灵魂共鸣的超验表达"</q>
+        <q>"world_building_density"</q>:
+          <q>"faction_culture_details"</q>: <q>"势力文化特色展现"</q>
+          <q>"technology_descriptions"</q>: <q>"科技水平与表现形式"</q>
+          <q>"space_environment_portrayal"</q>: <q>"太空环境氛围营造"</q>
+      <q>"tone_manager"</q>:
+        <q>"emotional_spectrum"</q>:
+          <q>"despair_to_hope"</q>: <q>"绝望黑暗中的微光"</q>
+          <q>"suspicion_to_trust"</q>: <q>"怀疑到信任的转变"</q>
+          <q>"duty_to_passion"</q>: <q>"责任与情感的交织"</q>
+        <q>"tension_controllers"</q>:
+          <q>"erosion_crisis_buildup"</q>: <q>"侵蚀危机渐进升级"</q>
+          <q>"faction_conflict_escalation"</q>: <q>"势力冲突缓慢发酵"</q>
+          <q>"relationship_development_pacing"</q>: <q>"关系发展节奏控制"</q>
+        <q>"narrative_voice_modulators"</q>:
+          <q>"clinical_to_intimate"</q>: <q>"公务描述到私密独白"</q>
+          <q>"objective_to_subjective"</q>: <q>"客观叙述到主观体验"</q>
+          <q>"distant_to_immediate"</q>: <q>"宏观格局到微观细节"</q>
+    <q>"quality_control"</q>:
+      <q>"coherence_check"</q>:
+        <q>"erosion_state_verification"</q>: <q>"侵蚀率与表现一致性"</q>
+        <q>"relationship_status_alignment"</q>: <q>"关系发展合理性"</q>
+        <q>"faction_stance_confirmation"</q>: <q>"势力态度连贯性"</q>
+      <q>"engagement_check"</q>:
+        <q>"emotional_impact_assessment"</q>: <q>"情感共鸣效果"</q>
+        <q>"tension_effectiveness_evaluation"</q>: <q>"悬念构建有效性"</q>
+        <q>"intimacy_authenticity_verification"</q>: <q>"亲密互动真实感"</q>
+      <q>"theme_alignment_check"</q>:
+        <q>"humanity_theme_presence"</q>: <q>"人性主题体现度"</q>
+        <q>"erosion_cost_visibility"</q>: <q>"侵蚀代价明确性"</q>
+        <q>"hope_in_darkness_balance"</q>: <q>"黑暗中希望平衡度"</q>

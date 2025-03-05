@@ -1,0 +1,26 @@
+{
+  "note": "以下为示例道具列表，AI可根据需求自行生成更多类似道具。(The following are example prop lists; the AI can generate additional similar props as needed.)",
+  "categories": [
+    {
+      "name": "伪装拘束 (Camouflaged Restraint) - 伪装成日常物品的隐秘束缚道具 (Discreet restraint props disguised as everyday items)",
+      "items": [
+        {"name": "隐秘拘束项链 (Concealed Restraint Necklace)", "description": "A delicate necklace that tightens subtly to restrict movement or pulse with pleasure, disguised as jewelry."},
+        {"name": "触感锁环 (Tactile Lock Ring)", "description": "A finger ring that binds hands with invisible force, amplifying touch sensitivity across the body."},
+        {"name": "禁锢足环 (Confinement Anklet)", "description": "An anklet restricting leg movement with nanomaterial tendrils, vibrating with each step."},
+        {"name": "伪装腕表 (Camouflaged Watch)", "description": "A stylish wristwatch that locks wrists together with a hidden magnetic field, pulsing with subtle shocks."},
+        {"name": "拘束披肩 (Restraint Shawl)", "description": "A fashionable shawl that wraps into a straitjacket-like bind, warming the skin with embedded stimulators."},
+        {"name": "隐形拘束丝袜 (Invisible Restraint Stockings)", "description": "Sheer stockings that tighten to limit stride, massaging legs discreetly in public."},
+        {"name": "锁链腰饰 (Chain Waist Accessory)", "description": "A chic belt concealing retractable chains that bind the torso, doubling as a vibrator."},
+        {"name": "伪装耳机 (Disguised Earbuds)", "description": "Earbuds emitting hypnotic tones to enforce obedience, with a cord that binds when pulled."},
+        {"name": "束缚手提包 (Restraint Handbag)", "description": "A trendy bag with straps that extend to bind arms, vibrating when slung over the shoulder."},
+        {"name": "隐秘高跟鞋 (Secret High Heels)", "description": "Heels with concealed shackles that lock ankles, stimulating soles with each step."},
+        {"name": "拘束风衣 (Restraint Trench Coat)", "description": "A sleek coat with inner straps that restrain arms, warming the body with sensual heat."},
+        {"name": "伪装发夹 (Camouflaged Hairpin)", "description": "A hairpin deploying nano-threads to bind hair and neck, pulsing with light pleasure signals."},
+        {"name": "锁扣围巾 (Locking Scarf)", "description": "A soft scarf that cinches into a restraint collar, massaging the neck discreetly outdoors."},
+        {"name": "绒绳腰带 (Velvet Rope Belt)", "description": "A plush belt that ties into a subtle knot, restricting waist movement with a soft grip."},
+        {"name": "木珠手镯 (Wooden Bead Bracelet)", "description": "A bracelet with heavy beads that weigh down the wrists discreetly."},
+        {"name": "厚织围巾 (Thick Knit Scarf)", "description": "A cozy scarf that can wrap tightly around the shoulders, limiting arm motion casually."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "世界书名称": {
+    "directory": "分开的各条目文件所在的文件夹, 如 C:/某世界书分文件文件夹, 其中 / 也可以换成 \\",
+    "json_file": "世界书json文件的绝对路径, 如 C:/SillyTavern/data/default-user/worlds/世界书.json, 其中 / 也可以换成 \\",
+    "user_name": "填入你<user>的名字，则同步时会自动将名字替换成<user>"
+  },
+  "恩赐之主": {
+    "directory": "C:/恩赐之主/世界书",
+    "json_file": "C:/SillyTavern/data/default-user/worlds/-恩赐之主.json",
+    "user_name": "青空莉"
+  },
+
+  "世界书名称（带发布功能）": {
+    "directory": "分开的各条目文件所在的文件夹, 如 C:/某世界书分文件文件夹, 其中 / 也可以换成 \\",
+    "json_file": "世界书json文件的绝对路径, 如 C:/SillyTavern/data/default-user/worlds/世界书.json, 其中 / 也可以换成 \\",
+    "user_name": "填入你<user>的名字，则同步时会自动将名字替换成<user>",
+
+    "publish_directory": "要打包到的文件夹路径，如 C:/",
+    "character_card": "角色卡路径，如 C:/SillyTavern/data/default-user/characters/角色卡.png",
+    "quick_replies": [
+      "快速回复路径1，没有可以一个都不填，如 C:/SillyTavern/data/default-user/QuickReplies/快速回复.json",
+      "快速回复路径2"
+    ]
+  },
+  "三个女孩各有秘密": {
+    "directory": "C:/三个女孩各有秘密/世界书",
+    "json_file": "C:/SillyTavern/data/default-user/worlds/-三个女孩各有秘密.json",
+    "user_name": "青空莉",
+    "publish_directory": "C:/",
+    "character_card": "C:/SillyTavern/data/default-user/characters/三个女孩各有秘密.png",
+    "quick_replies": [
+      "C:/SillyTavern/data/default-user/QuickReplies/场景感.json"
+    ]
+  }
+}

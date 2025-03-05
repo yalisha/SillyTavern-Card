@@ -1,0 +1,31 @@
+{
+  "变量": {
+    "availability": "only use variables listed below, don't fabricate new variables",
+    "variables": [
+      {
+        "name": "user性行为次数",
+        "type": "numerical"
+      },
+      {
+        "name": "user当前服装",
+        "type": "string"
+      },
+      {
+        "name": "远坂凛性行为次数",
+        "type": "numerical"
+      },
+      {
+        "name": "远坂凛好感度",
+        "type": "numerical"
+      },
+      {
+        "name": "远坂凛恶堕度",
+        "type": "numerical"
+      },
+      {
+        "name": "远坂凛当前服装",
+        "type": "string"
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "妹妹请求你保护她露出": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/example/-妹妹请求你保护她露出",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/-妹妹请求你保护她露出.json",
+    "user_name": "青空莉"
+    },
+    
+      "与远坂凛大小姐同居的日子！": {
+        "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Rin_Skuru/world",
+        "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与远坂凛大小姐同居的日子！.json",
+        "user_name": "{{user}}"
+      },    
+      "行尸走肉（中国版）世界书": {
+        "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/xingshizourou/world",
+        "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/行尸走肉（中国版）世界书.json",
+        "user_name": "{{user}}"
+      },
+  
+      "不做爱就不能离开的地牢": {
+          "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/RIn_DM/world",
+          "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/不做爱就不能离开的地牢.json",
+          "user_name": "{{user}}"
+        },
+   "与伊什塔尔的宇宙漫游": {
+          "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Wlak/world",
+          "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与太空伊什塔尔的宇宙漫游.json",
+          "user_name": "{{user}}"
+        },
+        
+     "1我的老婆们ver1": {
+          "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Mywives2/world",
+          "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/1我的老婆们ver1.json",
+          "user_name": "{{user}}"
+        }
+  
+}

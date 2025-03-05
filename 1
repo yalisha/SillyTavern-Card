@@ -1,0 +1,2461 @@
+```
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>末世开局选择</title>
+    <style>
+        @import url('https://static.zeoseven.com/zsft/235/main/result.css');
+
+        :root {
+            --global-font: "chengrongguangke";
+            --panel-bg: rgba(255, 255, 255, 0.85);
+            --primary-color: #4CAF50;
+            --hover-color: #45a049;
+            --accent-color: #2196F3;
+            --error-color: #f44336;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --disabled-color: #9E9E9E;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --text-tertiary: #455a64;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234CAF50" stroke-width="2"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg>') 12 12, auto;
+            height: 800px;
+            background: url('https://pub-0f03753252fb439e966a538d05f20ef.r2.dev/docs/1734444679152.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: var(--global-font);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .creation-container {
+            width: 90%;
+            max-width: 1400px;
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .creation-header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .creation-header h1 {
+            font-size: 3.0em;
+            color: var(--text-primary);
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .creation-header p {
+            font-size: 2.8em;
+            color: var(--text-secondary);
+            margin: 10px 0 0;
+        }
+
+        .steps-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            margin: 0 20px;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .step-item.active {
+            opacity: 1;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .step-text {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .section-title {
+            text-align: left;
+            padding: 15px 25px;
+            margin: 25px 0;
+            font-size: 2.5em;
+            color: var(--text-primary);
+            border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-selection, .difficulty-selection, .resource-grid, .location-selection, .follower-selection, .base-selection {
+            display: grid;
+            gap: 5px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 5px 0;
+        }
+
+        .time-selection, .difficulty-selection, .resource-grid, .location-selection, .follower-selection, .base-selection {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .time-card, .difficulty-card, .resource-card, .location-card, .follower-card, .base-card {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 10px;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234CAF50" stroke-width="2"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg>') 12 12, auto;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-card:hover, .difficulty-card:hover, .resource-card:hover, .location-card:hover, .follower-card:hover, .base-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-card.selected, .difficulty-card.selected, .resource-card.selected, .location-card.selected, .follower-card.selected, .base-card.selected {
+            border: 2px solid var(--primary-color);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .time-header, .difficulty-header, .resource-header, .location-header, .follower-header, .base-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .time-name, .difficulty-name, .resource-name, .location-name, .follower-name, .base-name {
+            font-size: 2.0em;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .points-value {
+            font-size: 1.6em;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .time-description, .difficulty-description, .resource-description, .location-description, .follower-description, .base-description {
+            font-size: 2.0em;
+            color: var(--text-secondary);
+            line-height: 1.2;
+            margin: 2px 0;
+        }
+
+        .resource-value {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 水平方向居中对齐 */
+            gap: 2px;
+        }
+
+        .decrease-btn:hover, .increase-btn:hover {
+            background: var(--hover-color);
+        }
+
+        .decrease-btn:disabled, .increase-btn:disabled {
+            background: var(--disabled-color);
+            cursor: not-allowed;
+        }
+
+        .resource-card.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.5em;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234CAF50" stroke-width="2"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg>') 12 12, auto;
+            transition: all 0.3s ease;
+            font-family: var(--global-font);
+        }
+
+        .prev-btn {
+            background: linear-gradient(135deg, #757575, #616161);
+            color: white;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+            color: white;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                height: auto; /* 适应内容高度 */
+                background-size: contain; /* 适应背景图 */
+            }
+
+            .creation-container {
+                width: 80%; /* 宽度占满屏幕 */
+                padding: 15px; /* 减少内边距 */
+            }
+
+            .creation-header h1 {
+                font-size: 1.5em; /* 减小字体大小 */
+            }
+
+            .creation-header p {
+                font-size: 1.2em; /* 减小字体大小 */
+            }
+
+            .step-text {
+                font-size: 1.2em; /* 减小字体大小 */
+            }
+
+            .section-title {
+                font-size: 1.5em; /* 减小字体大小 */
+            }
+
+            .time-name, .difficulty-name, .resource-name, .location-name, .follower-name, .base-name {
+                font-size: 1.2em; /* 减小字体大小 */
+            }
+
+            .points-value {
+                font-size: 1.0em; /* 减小字体大小 */
+            }
+
+            .time-description, .difficulty-description, .resource-description, .location-description, .follower-description, .base-description {
+                font-size: 1.1em; /* 减小字体大小 */
+            }
+
+            .resource-value {
+                gap: 2px; /* 调整间距 */
+            }
+
+            .nav-btn {
+                padding: 10px 20px; /* 减小按钮尺寸 */
+                font-size: 1.0em; /* 减小字体大小 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="creation-container" style="overflow-y: auto;">
+        <div class="creation-header">
+            <h1>末世之路</h1>
+            <p>选择你的开局条件</p>
+        </div>
+
+        <div class="steps-indicator">
+            <div class="step-item active">
+                <div class="step-number">1</div>
+                <div class="step-text">末世时期与难度</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-text">开局拥有资源</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-text">开局地点与部下</div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-text">基地与具体设定</div>
+            </div>
+        </div>
+
+        <div class="creation-content">
+            <!-- 内容将通过JavaScript动态生成 -->
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn prev-btn" disabled>返回</button>
+            <button class="nav-btn next-btn">下一步</button>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            TIMES: {
+                末世爆发7天前: {
+                    id: '末世爆发7天前',
+                    name: '末世爆发7天前',
+                    description: '一切还来得及，但危机四伏。'
+                },
+                末世爆发当天: {
+                    id: '末世爆发当天',
+                    name: '末世爆发当天',
+                    description: '混乱初起，资源丰富但危险重重。'
+                },
+                末世爆发7天后: {
+                    id: '末世爆发7天后',
+                    name: '末世爆发7天后',
+                    description: '秩序开始崩溃，资源逐渐稀缺。'
+                },
+                末世爆发一个月后: {
+                    id: '末世爆发一个月后',
+                    name: '末世爆发一个月后',
+                    description: '大部分人口消失，资源极度稀缺。'
+                },
+                末世爆发2个月后: {
+                    id: '末世爆发2个月后',
+                    name: '末世爆发2个月后',
+                    description: '智慧丧尸与智慧尸潮出现时期。'
+                },
+                末世爆发3个月后: {
+                    id: '末世爆发3个月后',
+                    name: '末世爆发3个月后',
+                    description: '变异丧尸出现时期。'
+                },
+                末世爆发半年后: {
+                    id: '末世爆发半年后',
+                    name: '末世爆发半年后',
+                    description: '尸潮围困基地时期。'
+                },
+                末世爆发1年后: {
+                    id: '末世爆发1年后',
+                    name: '末世爆发1年后',
+                    description: '变异丧尸大规模出现时期。'
+                },
+                末世爆发10年后: {
+                    id: '末世爆发10年后',
+                    name: '末世爆发10年后',
+                    description: '人类文明大沦陷时期。'
+                },
+                末世爆发20年后: {
+                    id: '末世爆发20年后',
+                    name: '末世爆发20年后',
+                    description: '人类与丧尸文明大决战时期。'
+                }
+            },
+            DIFFICULTIES: {
+                lucky: {
+                    id: 'lucky',
+                    name: '祝你好运',
+                    points: 10,
+                    description: '需要白手起家，适合挑战者'
+                },
+                hell: {
+                    id: 'hell',
+                    name: '炼狱',
+                    points: 30,
+                    description: '生存难度极高，开局资源极少。'
+                },
+                hard: {
+                    id: 'hard',
+                    name: '困难',
+                    points: 60,
+                    description: '生存难度高，但开局可以拥有一定的资源。'
+                },
+                normal: {
+                    id: 'normal',
+                    name: '普通',
+                    points: 120,
+                    description: '生存难度中等，开局拥有不少资源，适合开局玩独狼。'
+                },
+                easy: {
+                    id: 'easy',
+                    name: '简单',
+                    points: 240,
+                    description: '生存难度简单，开局资源丰富，适合开局玩基地。'
+                },
+                tourist: {
+                    id: 'tourist',
+                    name: '祝你玩的开心',
+                    points: 6000,
+                    description: '开局资源极其丰富，可以尽情享受末世生活。'
+                },
+                laterstage: {
+                    id: 'laterstage',
+                    name: '适配大后期玩基地',
+                    points: 200000,
+                    description: '开局资源极其丰富。'
+                },
+            },
+            RESOURCES: {
+                末世房车: {
+                    id: '末世房车',
+                    name: '末世房车',
+                    description: '开局拥有一辆防御堪比装甲车且车内功能齐全的改装房车',
+                    cost: 30
+                },
+                唐横刀: {
+                    id: '唐横刀',
+                    name: '唐横刀',
+                    description: '开局拥有一把极度锋利且永不损坏的唐代横刀',
+                    cost: 15
+                },
+                桶装汽油: {
+                    id: '桶装汽油',
+                    name: '10桶桶装汽油',
+                    description: '开局拥有10桶每桶容量100升的桶装汽油',
+                    cost: 10
+                },
+                金条: {
+                    id: '金条',
+                    name: '10根金条',
+                    description: '开局拥有10根每根1kg的金条',
+                    cost: 10
+                },
+                战术背包: {
+                    id: '战术背包',
+                    name: '战术背包',
+                    description: '开局拥有1个大容量的军用多功能背包',
+                    cost: 10
+                },
+                高级医疗包: {
+                    id: '高级医疗包',
+                    name: '高级医疗包',
+                    description: '包含高级医疗设备和药品，可以治疗重伤和感染',
+                    cost: 10
+                },
+                便携式太阳能发电器: {
+                    id: '便携式太阳能发电器',
+                    name: '便携式太阳能发电器',
+                    description: '提供稳定的电力供应，适用于小型设备和照明',
+                    cost: 10
+                },
+                多功能工具包: {
+                    id: '多功能工具包',
+                    name: '多功能工具包',
+                    description: '包含各种工具，适用于修理和制造各种物品',
+                    cost: 10
+                },
+                便携式净水器: {
+                    id: '便携式净水器',
+                    name: '便携式净水器',
+                    description: '可以将任何水源净化为可饮用的水，确保生存',
+                    cost: 10
+                },
+                高级防护服: {
+                    id: '高级防护服',
+                    name: '高级防护服',
+                    description: '提供高级防护，减少丧尸攻击带给你的伤害',
+                    cost: 15
+                },
+                装甲车: {
+                    id: '装甲车',
+                    name: '装甲车',
+                    description: '开局拥有一辆重型军用装甲步战车',
+                    cost: 35
+                },
+                无尽左轮: {
+                    id: '无尽左轮',
+                    name: '无尽左轮',
+                    description: '瑞克专属神器，威力强大永不磨损且无限弹药',
+                    cost: 20
+                },
+                强力弓弩: {
+                    id: '强力弓弩',
+                    name: '强力弓弩',
+                    description: '威力强大的弓弩，射程可达100米，配备30支耐用锋利的弩箭',
+                    cost: 10
+                },
+                便携式电台: {
+                    id: '便携式电台',
+                    name: '便携式电台',
+                    description: '可以与远处的幸存者保持联系，获取信息和支援',
+                    cost: 10
+                },
+                无线电对讲机: {
+                    id: '无线电对讲机',
+                    name: '无线电对讲机',
+                    description: '开局拥有1部长距离无线电对讲机',
+                    cost: 5
+                },
+                悍马越野车: {
+                    id: '悍马越野车',
+                    name: '悍马越野车',
+                    description: '开局拥有一辆改装悍马越野车',
+                    cost: 20
+                },
+                改装皮卡: {
+                    id: '改装皮卡',
+                    name: '改装皮卡',
+                    description: '开局拥有一辆改装后的大容量皮卡货车',
+                    cost: 20
+                },
+                坦克: {
+                    id: '坦克',
+                    name: '坦克',
+                    description: '开局拥有一辆坦克',
+                    cost: 50
+                },
+                直升机: {
+                    id: '直升机',
+                    name: '直升机',
+                    description: '开局拥有一架直升机',
+                    cost: 50
+                },
+                万能钥匙: {
+                    id: '万能钥匙',
+                    name: '万能钥匙',
+                    description: '开局拥有一把可以打开任何大门的万能钥匙',
+                    cost: 10
+                },
+                成男智能生物仿生人: {
+                    id: '成男智能生物仿生人',
+                    name: '成男智能生物仿生人',
+                    description: '开局拥有一名外形为成年大叔且战力不俗的智能生物仿生人并对你绝对的忠诚',
+                    cost: 30
+                },
+                正太智能生物仿生人: {
+                    id: '正太智能生物仿生人',
+                    name: '正太智能生物仿生人',
+                    description: '开局拥有一名外形为未成年正太且战力不俗的智能生物仿生人并对你绝对的忠诚',
+                    cost: 30
+                },
+                成女智能生物仿生人: {
+                    id: '成女智能生物仿生人',
+                    name: '成女智能生物仿生人',
+                    description: '开局拥有一名外形为成年熟妇且战力不俗的智能生物仿生人并对你绝对的忠诚',
+                    cost: 30
+                },
+                萝莉智能生物仿生人: {
+                    id: '萝莉智能生物仿生人',
+                    name: '萝莉智能生物仿生人',
+                    description: '开局拥有一名外形为未成年萝莉且战力不俗的智能生物仿生人并对你绝对的忠诚',
+                    cost: 30
+                },
+                末世天启坦克制造蓝图: {
+                    id: '末世天启坦克制造蓝图',
+                    name: '末世天启坦克制造蓝图',
+                    description: '开局拥有末世天启坦克的制造蓝图',
+                    cost: 500
+                },
+                末世天启战机制造蓝图: {
+                    id: '末世天启战机制造蓝图',
+                    name: '末世天启战机制造蓝图',
+                    description: '开局拥有末世天启战机的制造蓝图',
+                    cost: 500
+                },
+                末世天启机甲制造蓝图: {
+                    id: '末世天启机甲制造蓝图',
+                    name: '末世天启机甲制造蓝图',
+                    description: '开局拥有末世天启机甲的制造蓝图',
+                    cost: 500
+                }
+            },
+            LOCATIONS: {
+                城市中心: {
+                    id: '城市中心',
+                    name: '城市中心',
+                    description: '开局位于一个城市中心，资源丰富，但危险重重。高楼大厦中藏有大量物资，但同时也充满了丧尸和敌对势力。'
+                },
+                郊区: {
+                    id: '郊区',
+                    name: '郊区',
+                    description: '开局位于一个城市郊区，相对安全，资源适中。房屋和商店中有一些基本物资，但需要小心零星的丧尸。'
+                },
+                乡村: {
+                    id: '乡村',
+                    name: '乡村',
+                    description: '开局位于一个乡村，环境优美，资源匮乏。农田和小村庄中有一些食物和基本工具，但需要自给自足。'
+                },
+                森林: {
+                    id: '森林',
+                    name: '森林',
+                    description: '开局位于一片森林，隐蔽性强，资源丰富。森林中有丰富的食物和水源，但需要小心野兽和迷路。'
+                },
+                山区小镇: {
+                    id: '山区小镇',
+                    name: '山区小镇',
+                    description: '开局位于一个山区小镇，地势险要，资源稀缺。山区小镇中有一些坚固的建筑和少量物资，但交通不便。'
+                },
+                海岸城市: {
+                    id: '海岸城市',
+                    name: '海岸城市',
+                    description: '开局位于一个海岸城市，交通便利，资源丰富。港口和沿海地区有丰富的物资和船只，但需要小心海上的威胁。'
+                },
+                度假岛屿: {
+                    id: '度假岛屿',
+                    name: '度假岛屿',
+                    description: '开局位于一个度假岛屿，相对安全，资源有限。岛屿上有丰富的海鲜和水果，但需要自行解决淡水问题。'
+                },
+                地下设施: {
+                    id: '地下设施',
+                    name: '地下设施',
+                    description: '开局位于一个地下设施，隐蔽性强，资源丰富。地下设施中有丰富的物资和隐蔽的避难所，但环境潮湿且容易迷路。'
+                },
+                城市废墟: {
+                    id: '城市废墟',
+                    name: '城市废墟',
+                    description: '开局位于一个城市废墟，危险重重，资源丰富。废墟中有大量的物资和隐藏的宝藏，但充满了丧尸和陷阱。'
+                },
+                废弃军事基地: {
+                    id: '废弃军事基地',
+                    name: '废弃军事基地',
+                    description: '开局位于一个废弃的军事基地，基地内有部分残存的军事装备和物资，但环境较为荒凉。',
+                },
+                高速服务站: {
+                    id: '高速服务站',
+                    name: '高速服务站',
+                    description: '开局位于一个高速服务站内，站内拥有充足的燃油储备、各种大中小型车辆和丰富的物资储备，但距离其他小镇或城市较远，需要在服务站物资耗尽前解决物资储备和消耗的问题。',
+                },
+                城市公寓: {
+                    id: '城市公寓',
+                    name: '城市公寓',
+                    description: '开局位于某城市内的一个单身公寓大楼内，楼内房间众多，资源丰富，但大部分房门紧锁，需要自行解决开锁问题。',
+                },
+                大学宿舍: {
+                    id: '大学宿舍',
+                    name: '大学宿舍',
+                    description: '开局位于某大学某栋宿舍楼内的宿舍之中。',
+                },
+                废弃农场: {
+                    id: '废弃农场',
+                    name: '废弃农场',
+                    description: '开局位于一个废弃农场，农场内有部分残存的农具和种子，但需要自行重建和维护。',
+                },
+                军事基地: {
+                    id: '军事基地',
+                    name: '军事基地',
+                    description: '开局位于一个军事基地，防御强大，资源丰富。军事基地中有先进的武器和装备，但需要应对可能的敌对势力。'
+                },
+                海上巨型游轮: {
+                    id: '海上巨型游轮',
+                    name: '海上巨型游轮',
+                    description: '开局位于一艘豪华的海上巨型游轮上，游轮上有丰富的物资和设施，需要小心应对可能出现的海上危机和丧尸袭击。'
+                },
+                大厦楼顶: {
+                    id: '大厦楼顶',
+                    name: '大厦楼顶',
+                    description: '开局位于一座高楼大厦的楼顶，视野开阔，可以俯瞰周围环境，便于观察和规划行动路线。需要小心应对可能的高处坠落危险和丧尸围攻。'
+                },
+                大型幸存者据点: {
+                    id: '大型幸存者据点',
+                    name: '大型幸存者据点',
+                    description: '开局位于一个大型幸存者据点内，基地情况随机。'
+                },
+                大型幸存者营地: {
+                    id: '大型幸存者营地',
+                    name: '大型幸存者营地',
+                    description: '开局位于一个大型幸存者营地内，基地情况随机。'
+                },
+                大型幸存者基地: {
+                    id: '大型幸存者基地',
+                    name: '大型幸存者基地',
+                    description: '开局位于一个大型幸存者基地内，基地情况随机。'
+                },
+                大型幸存者城市: {
+                    id: '大型幸存者城市',
+                    name: '大型幸存者城市',
+                    description: '开局位于一个大型幸存者城市内，基地情况随机。'
+                },
+                大型幸存者国度: {
+                    id: '大型幸存者国度',
+                    name: '大型幸存者国度',
+                    description: '开局位于一个大型幸存者国度内，基地情况随机。'
+                }
+            },
+            FOLLOWERS: {
+                soldier: {
+                    id: 'soldier',
+                    name: '刘武',
+                    age: 25,
+                    gender: '男',
+                    profession: '士兵',
+                    abilities: '精通多种枪械，擅长近战格斗，能够在战斗中提供坚实的火力支持和防御',
+                    cost: 10
+                },
+                doctor: {
+                    id: 'doctor',
+                    name: '刘美',
+                    age: 30,
+                    gender: '女',
+                    profession: '医生',
+                    abilities: '具备高级医疗技能，能够治疗重伤和感染，提高团队的生存能力',
+                    cost: 15
+                },
+                mechanicalEngineer: {
+                    id: 'mechanicalEngineer',
+                    name: '曹魏',
+                    age: 30,
+                    gender: '男',
+                    profession: '机械工程师',
+                    abilities: '擅长修理和制造各种机械设备，可以快速修复车辆和武器保持良好状态，提高移动和生存能力',
+                    cost: 15
+                },
+                psychologist: {
+                    id: 'psychologist',
+                    name: '徐燕',
+                    age: 26,
+                    gender: '女',
+                    profession: '心理医生',
+                    abilities: '擅长心理治疗和团队管理，可以提高团队士气和凝聚力',
+                    cost: 15
+                },
+                radioExpert: {
+                    id: 'radioExpert',
+                    name: '六天',
+                    age: 28,
+                    gender: '男',
+                    profession: '无线电专家',
+                    abilities: '擅长通信和信号处理，可以与远处的幸存者保持联系，获取信息和支援',
+                    cost: 15
+                },
+                survivalExpert: {
+                    id: 'survivalExpert',
+                    name: '魏延',
+                    age: 30,
+                    gender: '男',
+                    profession: '生存专家',
+                    abilities: '擅长野外生存和资源获取，可以找到丰富的食物和水源',
+                    cost: 15
+                },
+                engineer: {
+                    id: 'engineer',
+                    name: '曹雄',
+                    age: 30,
+                    gender: '男',
+                    profession: '工程师',
+                    abilities: '擅长各种工程建造，能够快速修复和建造基地设施，提高基地的防御能力',
+                    cost: 15
+                },
+                farmer: {
+                    id: 'farmer',
+                    name: '郭民',
+                    age: 40,
+                    gender: '男',
+                    profession: '农民',
+                    abilities: '擅长种植各种农作物，能够确保团队有稳定的粮食供应，提高自给自足能力',
+                    cost: 15
+                },
+                cook: {
+                    id: 'cook',
+                    name: '柳茹',
+                    age: 25,
+                    gender: '女',
+                    profession: '厨师',
+                    abilities: '烹饪技术高超，能够制作营养丰富的食物，提高团队的士气和体力恢复速度',
+                    cost: 10
+                },
+                scout: {
+                    id: 'scout',
+                    name: '会影',
+                    age: 24,
+                    gender: '男',
+                    profession: '侦察兵',
+                    abilities: '擅长侦查和潜行，能够在不被发现的情况下获取情报，提前发现危险',
+                    cost: 10
+                },
+                sniper: {
+                    id: 'sniper',
+                    name: '黑鹰',
+                    age: 26,
+                    gender: '男',
+                    profession: '狙击手',
+                    abilities: '射击精准，能够在远距离消灭敌人，提供有效的火力支援和狙击支援',
+                    cost: 15
+                },
+                nurse: {
+                    id: 'KTV Princess',
+                    name: '李雪',
+                    age: 20,
+                    gender: '女',
+                    profession: 'KTV公主',
+                    abilities: '精通各种性技巧和娱乐技巧，能够提升团队士气，提供心理支持，减少压力，服务专业。',
+                    cost: 10
+                },
+                hunter: {
+                    id: 'hunter',
+                    name: '达里尔',
+                    age: 25,
+                    gender: '男',
+                    profession: '猎人',
+                    abilities: '擅长狩猎和追踪，可以提供丰富的食物和材料，战力强悍',
+                    cost: 15
+                },
+                scavenger: {
+                    id: 'scavenger',
+                    name: '难多',
+                    age: 33,
+                    gender: '男',
+                    profession: '拾荒者',
+                    abilities: '在末世废墟中如鱼得水，擅长挖掘和搜寻被遗忘的有用物资，总能在不起眼的角落发现各种零件、工具、武器配件等，经过简单修复和改造后，这些物资能为团队带来意想不到的助力，增强团队的物资储备和应对突发状况的能力',
+                    cost: 10
+                },
+                scientist: {
+                    id: 'scientist',
+                    name: '尤金',
+                    age: 35,
+                    gender: '男',
+                    profession: '科学家',
+                    abilities: '科研能力强，能够研究和开发新的技术和设备，提高团队的科技水平',
+                    cost: 20
+                },
+                nun: {
+                    id: 'nun',
+                    name: '刘朵',
+                    age: 19,
+                    gender: '女',
+                    profession: '修女',
+                    abilities: '性格多善，圣母，喜欢乱发善心，容易引发不必要的麻烦和冲突，给团队带来额外的困扰，但有时会有一些出人意料的小动作',
+                    cost: -10
+                },
+                柔弱少妇: {
+                    id: '柔弱少妇',
+                    name: '柔弱少妇徐敏',
+                    age: 26,
+                    gender: '女',
+                    profession: '家庭主妇',
+                    abilities: '体格柔弱的少妇并带有一个8岁的女儿李青青，需要团队多多照顾，会给团队带来额外的困扰',
+                    cost: -5
+                },
+                Complainer: {
+                    id: 'Complainer',
+                    name: '抱怨者王梅',
+                    age: 23,
+                    gender: '女',
+                    profession: '白富美',
+                    abilities: '总是对团队的决策和安排不满，抱怨连连，影响团队的团结和积极性，降低工作效率',
+                    cost: -10
+                },
+                coward: {
+                    id: 'coward',
+                    name: '胆小鬼薛明',
+                    age: 22,
+                    gender: '男',
+                    profession: '富二代',
+                    abilities: '在危险情况下容易惊慌失措，逃跑求生，可能会丢下队友不管，甚至为了活命可以故意拉队友一把帮他垫背，影响团队的战斗和生存能力',
+                    cost: -15
+                },
+                alcoholic: {
+                    id: 'alcoholic',
+                    name: '孙成',
+                    age: 26,
+                    gender: '男',
+                    profession: '酒鬼',
+                    abilities: '有酗酒等不良嗜好，需要定期消耗大量资源来满足自己的需求，否则会情绪失控，影响团队稳定',
+                    cost: -15
+                },
+                rebel: {
+                    id: 'rebel',
+                    name: '反叛者李宝成',
+                    age: 26,
+                    gender: '男',
+                    profession: '保安',
+                    abilities: '很有能力且会伪装自己，对权力颇为痴迷，会想要将队伍领袖取而代之，为此甚至会考虑陷害或者直接杀死领袖',
+                    cost: -20
+                },
+                student: {
+                    id: 'student',
+                    name: '柳柔柔',
+                    age: 16,
+                    gender: '女',
+                    profession: '学生',
+                    abilities: '你双腿残疾的妹妹，必须乘坐轮椅和专人照顾',
+                    cost: -15
+                }
+            },
+            BASE_OPTIONS: {
+                hasBase: {
+                    yes: {
+                        id: 'yes',
+                        name: '拥有基地',
+                        description: '选择拥有基地将解锁更多选项。',
+                        cost: 20  // 添加点数消耗
+                    },
+                    no: {
+                        id: 'no',
+                        name: '无基地',
+                        description: '选择无基地将无法进行基地相关设置。'
+                    }
+                },
+                population: {
+                    '10': {
+                        id: '10',
+                        name: '10人',
+                        cost: 1
+                    },
+                    '100': {
+                        id: '100',
+                        name: '100人',
+                        cost: 10
+                    },
+                    '500': {
+                        id: '500',
+                        name: '500人',
+                        cost: 50
+                    },
+                    '1000': {
+                        id: '1000',
+                        name: '1000人',
+                        cost: 100
+                    },
+                    '4000': {
+                        id: '4000',
+                        name: '4000人',
+                        cost: 400
+                    },
+                    '10000': {
+                        id: '10000',
+                        name: '10000人',
+                        cost: 1000
+                    },
+                    '30000': {
+                        id: '30000',
+                        name: '30000人',
+                        cost: 3000
+                    },
+                    '100000': {
+                        id: '100000',
+                        name: '100000人',
+                        cost: 10000
+                    },
+                    '500000': {
+                        id: '500000',
+                        name: '500000人',
+                        cost: 50000
+                    },
+                    '1000000': {
+                        id: '1000000',
+                        name: '1000000人',
+                        cost: 100000
+                    }
+                },
+                facilities: {
+                    发电厂: {
+                        id: '发电厂',
+                        name: '发电厂',
+                        description: '配备有数台中大型发电机，可提供稳定的电力供应，支持基地内各种设备的运行，但需要消耗燃料',
+                        cost: 20
+                    },
+                    净水处理设施: {
+                        id: '净水处理设施',
+                        name: '净水处理设施',
+                        description: '净化水源，确保基地居民有干净的水饮用和使用',
+                        cost: 15
+                    },
+                    医疗室: {
+                        id: '医疗室',
+                        name: '医疗室',
+                        description: '配备基本医疗设备和药品，可治疗伤病员',
+                        cost: 20
+                    },
+                    铁匠作坊: {
+                        id: '铁匠作坊',
+                        name: '铁匠作坊',
+                        description: '可制造和修理各种金属工具和武器',
+                        cost: 10
+                    },
+                    温室: {
+                        id: '温室',
+                        name: '温室',
+                        description: '可种植蔬菜和农作物，保障基地一定的食物供应',
+                        cost: 15
+                    },
+                    仓库: {
+                        id: '仓库',
+                        name: '仓库',
+                        description: '可储存食物、物资和装备，保持资源的干燥和安全',
+                        cost: 10
+                    },
+                    训练设施: {
+                        id: '训练设施',
+                        name: '训练设施',
+                        description: '用于训练基地成员的战斗和生存技能',
+                        cost: 20
+                    },
+                    通讯中心: {
+                        id: '通讯中心',
+                        name: '通讯中心',
+                        description: '与外界保持联系，获取信息和建立贸易',
+                        cost: 15
+                    },
+                    妓院: {
+                        id: '妓院',
+                        name: '妓院',
+                        description: '提供娱乐和放松的场所，改善基地成员的士气',
+                        cost: 10
+                    },
+                    研究实验室: {
+                        id: '研究实验室',
+                        name: '研究实验室',
+                        description: '进行科学研究和技术开发，寻找生存和发展的新方法',
+                        cost: 30
+                    }
+                },
+                defenses: {
+                    铁丝网墙: {
+                        id: '铁丝网墙',
+                        name: '铁丝网墙',
+                        description: '开局基地四周拥有一圈由铁丝网构成的围墙，防止小型动物和爬行动物入侵，对少量丧尸有一定的阻挡作用，围墙高2.5m宽0.1米',
+                        cost: 5
+                    },
+                    木围墙: {
+                        id: '木围墙',
+                        name: '木围墙',
+                        description: '开局基地四周拥有一圈木制的为基地提供基本防御的围墙，可阻挡野兽和小规模的攻击者与尸潮，围墙高3m宽0.5米',
+                        cost: 10
+                    },
+                    铁皮围墙: {
+                        id: '铁皮围墙',
+                        name: '铁皮围墙',
+                        description: '开局基地四周拥有一圈由木头和铁皮构成的围墙，在木制围墙上增加了铁皮，提高了防御强度，围墙高3m宽0.5米',
+                        cost: 20
+                    },
+                    砖墙: {
+                        id: '砖墙',
+                        name: '砖墙',
+                        description: '开局基地四周拥有一圈使用石砖，木头和水泥构成的围墙，为基地提供更坚固的防御，围墙高5m宽1米',
+                        cost: 30
+                    },
+                    城墙: {
+                        id: '城墙',
+                        name: '城墙',
+                        description: '开局基地四周拥有一圈使用水泥和钢筋浇筑而成，能够抵御重型武器的攻击，围墙高9m宽2米',
+                        cost: 40
+                    },
+                    要塞城墙: {
+                        id: '要塞城墙',
+                        name: '要塞城墙',
+                        description: '开局基地四周拥有一圈使用水泥、钢筋浇筑而成且被高科技防护罩加持的末世城墙，能够抵御大量变异丧尸的攻击，围墙高100m宽20米',
+                        cost: 5000
+                    },
+                    木制哨塔: {
+                        id: '木制哨塔',
+                        name: '4座木制哨塔',
+                        description: '开局在基地的四周各设立一座由木头构成的简易哨塔，用于监视周围环境，提前发现潜在威胁，可成为火力点，哨塔高4米',
+                        cost: 10
+                    },
+                    铁皮哨塔: {
+                        id: '铁皮哨塔',
+                        name: '4座铁皮哨塔',
+                        description: '开局在基地的四周各设立一座使用木头和铁皮建造而成的哨塔，能够抵御轻型武器的攻击，可成为火力点，哨塔高7米',
+                        cost: 20
+                    },
+                    水泥哨塔: {
+                        id: '水泥哨塔',
+                        name: '4座水泥哨塔',
+                        description: '开局在基地的四周各设立一座使用水泥和钢筋浇筑而成的哨塔，能够抵御重型武器的攻击，可成为小型堡垒和火力点，哨塔高15米',
+                        cost: 30
+                    },
+                    末世炮塔: {
+                        id: '末世炮塔',
+                        name: '末世炮塔',
+                        description: '开局在基地四周城墙上各设立有数座高科技组成的末世巨型电磁炮炮台，一发威力堪比战术核弹',
+                        cost: 5000
+                    },
+                    狙击塔: {
+                        id: '狙击塔',
+                        name: '狙击塔',
+                        description: '开局基地大门内的两侧各设立有一座使用水泥和钢筋浇筑而成的狙击塔，塔内各配备有2把高精狙击枪和1000发适配型号的子弹，哨塔高15米',
+                        cost: 15
+                    },
+                    大型能量护罩: {
+                        id: '大型能量护罩',
+                        name: '大型能量护罩',
+                        description: '开局基地拥有大型能量护罩，可抵御大量空中变异丧尸的攻击',
+                        cost: 10000
+                    },
+                    外围陷阱: {
+                        id: '外围陷阱',
+                        name: '外围陷阱',
+                        description: '开局在围墙的外围设置了陷阱，捕捉入侵者或野兽',
+                        cost: 10
+                    }
+                },
+                supplies: {
+                    食物储备: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    淡水储备: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    医疗物资: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    武器装备: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    工具储备: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    种子储备: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    燃料储备: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    建筑材料: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    生活物资: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    },
+                    车辆储备: {
+                        none: {
+                            id: 'none',
+                            name: '无储备',
+                            cost: 0
+                        },
+                        shortage: {
+                            id: 'shortage',
+                            name: '储备短缺',
+                            cost: 5
+                        },
+                        moderate: {
+                            id: 'moderate',
+                            name: '储备中等',
+                            cost: 10
+                        },
+                        abundant: {
+                            id: 'abundant',
+                            name: '储备充足',
+                            cost: 15
+                        },
+                        rich: {
+                            id: 'rich',
+                            name: '储备富裕',
+                            cost: 20
+                        }
+                    }
+                }
+            }
+        };
+
+        const gameState = {
+            currentStep: 1,
+            selectedTime: null,
+            selectedDifficulty: null,
+            availablePoints: 0,
+            selectedResources: [],
+            selectedLocation: null,
+            selectedFollowers: [],
+            selectedBase: null,
+            selectedPopulation: null,
+            selectedFacilities: [],
+            selectedDefenses: [],
+            selectedSupplies: {}
+        };
+
+        const UI = {
+            previousBaseSelection: null,
+            elements: {
+                content: document.querySelector('.creation-content'),
+                prevBtn: document.querySelector('.prev-btn'),
+                nextBtn: document.querySelector('.next-btn'),
+                steps: document.querySelectorAll('.step-item')
+            },
+
+            initialize() {
+                this.showCurrentStep();
+                this.bindNavigationEvents();
+            },
+
+            showCurrentStep() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+
+                this.elements.steps.forEach((step, index) => {
+                    step.classList.toggle('active', index + 1 === gameState.currentStep);
+                });
+
+                switch (gameState.currentStep) {
+                    case 1:
+                        this.showTimeAndDifficultySelection();
+                        break;
+                    case 2:
+                        this.showResourceSelection();
+                        break;
+                    case 3:
+                        this.showLocationAndFollowerSelection();
+                        break;
+                    case 4:
+                        this.showBaseSelection();
+                        break;
+                }
+
+                this.updateNavigationButtons();
+            },
+
+            showTimeAndDifficultySelection() {
+                const html = `
+                    <div class="section-title">选择时期</div>
+                    <div class="time-selection">
+                        ${Object.entries(CONFIG.TIMES).map(([id, time]) => `
+                            <div class="time-card ${gameState.selectedTime === id ? 'selected' : ''}" data-time-id="${id}">
+                                <div class="time-header">
+                                    <span class="time-name">${time.name}</span>
+                                </div>
+                                <div class="time-description">${time.description}</div>
+                            </div>
+                        `).join('')}
+                        <div class="time-card custom-time" data-time-id="自定义时期">
+                            <div class="time-header">
+                                <span class="time-name">自定义时期</span>
+                            </div>
+                            <div class="time-description">
+                                <input type="text" id="custom-time-description" placeholder="请输入自定义时期描述">
+                                <button class="add-custom-time-btn">添加时期</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">选择难度 (剩余点数: ${gameState.availablePoints})</div>
+                    <div class="difficulty-selection">
+                        ${Object.entries(CONFIG.DIFFICULTIES).map(([id, diff]) => `
+                            <div class="difficulty-card ${gameState.selectedDifficulty === id ? 'selected' : ''}" data-difficulty-id="${id}">
+                                <div class="difficulty-header">
+                                    <span class="difficulty-name">${diff.name}</span>
+                                    <span class="points-value">${diff.points}点</span>
+                                </div>
+                                <div class="difficulty-description">${diff.description}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                this.elements.content.innerHTML = html;
+                this.bindTimeAndDifficultyEvents();
+            },
+
+            showResourceSelection() {
+                const html = `
+                    <div class="section-title">选择资源 (剩余点数: ${gameState.availablePoints})</div>
+                    <div class="resource-grid">
+                        ${Object.entries(CONFIG.RESOURCES).map(([id, resource]) => `
+                            <div class="resource-card ${gameState.selectedResources.includes(id) ? 'selected' : ''}" data-resource-id="${id}">
+                                <div class="resource-header">
+                                    <span class="resource-name">${resource.name}</span>
+                                    <span class="points-value">${resource.cost}点</span>
+                                </div>
+                                <div class="resource-description">${resource.description}</div>
+                            </div>
+                        `).join('')}
+                        <div class="resource-card custom-resource" data-resource-id="自定义资源">
+                            <div class="resource-header">
+                                <span class="resource-name">自定义资源</span>
+                            </div>
+                            <div class="resource-description">
+                                <input type="text" id="custom-resource-name" placeholder="资源名称">
+                                <input type="text" id="custom-resource-description" placeholder="资源描述">
+                                <input type="number" id="custom-resource-cost" placeholder="资源点数成本" min="0">
+                                <button class="add-custom-resource-btn">添加资源</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                this.elements.content.innerHTML = html;
+                this.bindResourceEvents();
+            },
+
+            showLocationAndFollowerSelection() {
+                const html = `
+                    <div class="section-title">选择地点</div>
+                    <div class="location-selection">
+                        ${Object.entries(CONFIG.LOCATIONS).map(([id, location]) => `
+                            <div class="location-card ${gameState.selectedLocation === id ? 'selected' : ''}" data-location-id="${id}">
+                                <div class="location-header">
+                                    <span class="location-name">${location.name}</span>
+                                </div>
+                                <div class="location-description">${location.description}</div>
+                            </div>
+                        `).join('')}
+                        <div class="location-card custom-location" data-location-id="自定义地点">
+                            <div class="location-header">
+                                <span class="location-name">自定义地点</span>
+                            </div>
+                            <div class="location-description">
+                                <input type="text" id="custom-location-name" placeholder="地点名称">
+                                <input type="text" id="custom-location-description" placeholder="地点描述">
+                                <button class="add-custom-location-btn">添加地点</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">选择得力部下 (剩余点数: ${gameState.availablePoints})</div>
+                    <div class="follower-selection">
+                        ${Object.entries(CONFIG.FOLLOWERS).map(([id, follower]) => `
+                            <div class="follower-card ${gameState.selectedFollowers.includes(id) ? 'selected' : ''}" data-follower-id="${id}">
+                                <div class="follower-header">
+                                    <span class="follower-name">${follower.name}</span>
+                                    <span class="points-value">${follower.cost}点</span>
+                                </div>
+                                <div class="follower-description">
+                                    年龄: ${follower.age}<br>
+                                    性别: ${follower.gender}<br>
+                                    职业: ${follower.profession}<br>
+                                    能力: ${follower.abilities}
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="follower-card custom-follower" data-follower-id="自定义部下">
+                            <div class="follower-header">
+                                <span class="follower-name">自定义部下</span>
+                            </div>
+                            <div class="follower-description">
+                                <input type="text" id="custom-follower-name" placeholder="部下名称">
+                                <input type="number" id="custom-follower-age" placeholder="年龄">
+                                <input type="text" id="custom-follower-gender" placeholder="性别">
+                                <input type="text" id="custom-follower-profession" placeholder="职业">
+                                <input type="text" id="custom-follower-abilities" placeholder="能力描述">
+                                <input type="number" id="custom-follower-cost" placeholder="点数成本">
+                                <button class="add-custom-follower-btn">添加部下</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                this.elements.content.innerHTML = html;
+                this.bindLocationAndFollowerEvents();
+            },
+
+            showBaseSelection() {
+                const hasBaseOptions = Object.entries(CONFIG.BASE_OPTIONS.hasBase).map(([id, option]) => `
+                    <div class="base-card ${gameState.selectedBase === id ? 'selected' : ''}" data-base-id="${id}">
+                        <div class="base-header">
+                            <span class="base-name">${option.name}</span>
+                            ${option.cost ? `<span class="points-value">${option.cost}点</span>` : ''}
+                        </div>
+                        <div class="base-description">${option.description}</div>
+                    </div>
+                `).join('');
+
+                let populationOptions = `
+                    ${Object.entries(CONFIG.BASE_OPTIONS.population).map(([id, option]) => `
+                        <div class="base-card ${gameState.selectedPopulation === id ? 'selected' : ''}" data-population-id="${id}">
+                            <div class="base-header">
+                                <span class="base-name">${option.name}</span>
+                                <span class="points-value">${option.cost}点</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div class="base-card custom-population" data-population-id="自定义人口">
+                        <div class="base-header">
+                            <span class="base-name">自定义人口</span>
+                        </div>
+                        <div class="base-description">
+                            <input type="text" id="custom-population-name" placeholder="人口数量名称">
+                            <input type="number" id="custom-population-cost" placeholder="点数成本" min="0">
+                            <button class="add-custom-population-btn">添加人口</button>
+                        </div>
+                    </div>
+                `;
+
+                let facilitiesOptions = `
+                    ${Object.entries(CONFIG.BASE_OPTIONS.facilities).map(([id, option]) => `
+                        <div class="base-card ${gameState.selectedFacilities.includes(id) ? 'selected' : ''}" data-facility-id="${id}">
+                            <div class="base-header">
+                                <span class="base-name">${option.name}</span>
+                                <span class="points-value">${option.cost}点</span>
+                            </div>
+                            <div class="base-description">${option.description}</div>
+                        </div>
+                    `).join('')}
+                    <div class="base-card custom-facility" data-facility-id="自定义功能设施">
+                        <div class="base-header">
+                            <span class="base-name">自定义功能设施</span>
+                        </div>
+                        <div class="base-description">
+                            <input type="text" id="custom-facility-name" placeholder="功能设施名称">
+                            <input type="text" id="custom-facility-description" placeholder="功能设施描述">
+                            <input type="number" id="custom-facility-cost" placeholder="点数成本" min="0">
+                            <button class="add-custom-facility-btn">添加功能设施</button>
+                        </div>
+                    </div>
+                `;
+
+                let defensesOptions = `
+                    ${Object.entries(CONFIG.BASE_OPTIONS.defenses).map(([id, option]) => `
+                        <div class="base-card ${gameState.selectedDefenses.includes(id) ? 'selected' : ''}" data-defense-id="${id}">
+                            <div class="base-header">
+                                <span class="base-name">${option.name}</span>
+                                <span class="points-value">${option.cost}点</span>
+                            </div>
+                            <div class="base-description">${option.description}</div>
+                        </div>
+                    `).join('')}
+                    <div class="base-card custom-defense" data-defense-id="自定义防御设施">
+                        <div class="base-header">
+                            <span class="base-name">自定义防御设施</span>
+                        </div>
+                        <div class="base-description">
+                            <input type="text" id="custom-defense-name" placeholder="防御设施名称">
+                            <input type="text" id="custom-defense-description" placeholder="防御设施描述">
+                            <input type="number" id="custom-defense-cost" placeholder="点数成本" min="0">
+                            <button class="add-custom-defense-btn">添加防御设施</button>
+                        </div>
+                    </div>
+                `;
+
+                let suppliesOptions = `
+                    ${Object.entries(CONFIG.BASE_OPTIONS.supplies).map(([supplyType, options]) => `
+                        <div class="base-card">
+                            <div class="base-header">
+                                <span class="base-name">${supplyType}</span>
+                            </div>
+                            <div class="base-selection">
+                                ${Object.entries(options).map(([id, option]) => `
+                                    <div class="base-card ${gameState.selectedSupplies[supplyType] === id ? 'selected' : ''}" data-supply-id="${id}" data-supply-type="${supplyType}">
+                                        <span class="base-name">${option.name}</span>
+                                        <span class="points-value">${option.cost}点</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                `;
+
+                const html = `
+                    <div class="section-title">选择是否拥有基地(剩余点数: ${gameState.availablePoints})</div>
+                    <div class="base-selection">
+                        ${hasBaseOptions}
+                    </div>
+
+                    ${gameState.selectedBase === 'yes' ? `
+                        <div class="section-title">选择基地人口数量 (剩余点数: ${gameState.availablePoints})</div>
+                        <div class="base-selection">
+                            ${populationOptions}
+                        </div>
+
+                        <div class="section-title">选择基地功能设施 (剩余点数: ${gameState.availablePoints})</div>
+                        <div class="base-selection">
+                            ${facilitiesOptions}
+                        </div>
+
+                        <div class="section-title">选择基地防御设施 (剩余点数: ${gameState.availablePoints})</div>
+                        <div class="base-selection">
+                            ${defensesOptions}
+                        </div>
+
+                        <div class="section-title">选择基地物资储备 (剩余点数: ${gameState.availablePoints})</div>
+                        <div class="base-selection">
+                            ${suppliesOptions}
+                        </div>
+                    ` : ''}
+                `;
+
+                this.elements.content.innerHTML = html;
+                this.bindBaseSelectionEvents();
+            },
+
+            bindTimeAndDifficultyEvents() {
+                this.elements.content.querySelectorAll('.time-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const timeId = card.dataset.timeId;
+                        if (timeId !== "自定义时期") {
+                            if (gameState.selectedTime === timeId) {
+                                gameState.selectedTime = null;
+                                card.classList.remove('selected');
+                            } else {
+                                gameState.selectedTime = timeId;
+                                this.elements.content.querySelectorAll('.time-card').forEach(c => c.classList.remove('selected'));
+                                card.classList.add('selected');
+                            }
+                            this.showCurrentStep();
+                        }
+                    });
+                });
+
+                // 添加自定义时期的按钮事件
+                const addCustomTimeBtn = this.elements.content.querySelector('.add-custom-time-btn');
+                if (addCustomTimeBtn) {
+                    addCustomTimeBtn.addEventListener('click', () => {
+                        const customDescription = document.getElementById("custom-time-description").value.trim();
+                        if (!customDescription) {
+                            alert("请输入有效的自定义时期描述！");
+                            return;
+                        }
+
+                        // 创建自定义时期
+                        const customTimeId = `custom_time_${Date.now()}`; // 使用时间戳生成唯一ID
+                        CONFIG.TIMES[customTimeId] = {
+                            id: customTimeId,
+                            name: "自定义时期",
+                            description: customDescription
+                        };
+
+                        // 选择自定义时期
+                        gameState.selectedTime = customTimeId;
+                        this.showTimeAndDifficultySelection();
+                    });
+                }
+
+                // 绑定难度选择事件
+                this.elements.content.querySelectorAll('.difficulty-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const difficultyId = card.dataset.difficultyId;
+                        if (gameState.selectedDifficulty === difficultyId) {
+                            gameState.selectedDifficulty = null;
+                            card.classList.remove('selected');
+                            gameState.availablePoints = 0;
+                            gameState.selectedResources = [];
+                            gameState.selectedFollowers = [];
+                            gameState.selectedLocation = null;
+                            gameState.selectedBase = null;
+                            gameState.selectedPopulation = null;
+                            gameState.selectedFacilities = [];
+                            gameState.selectedDefenses = [];
+                            gameState.selectedSupplies = {};
+                        } else {
+                            gameState.selectedDifficulty = difficultyId;
+                            this.elements.content.querySelectorAll('.difficulty-card').forEach(c => c.classList.remove('selected'));
+                            card.classList.add('selected');
+                            gameState.availablePoints = CONFIG.DIFFICULTIES[difficultyId].points;
+                            gameState.selectedResources = [];
+                            gameState.selectedFollowers = [];
+                            gameState.selectedLocation = null;
+                            gameState.selectedBase = null;
+                            gameState.selectedPopulation = null;
+                            gameState.selectedFacilities = [];
+                            gameState.selectedDefenses = [];
+                            gameState.selectedSupplies = {};
+                        }
+                        this.showCurrentStep();
+                    });
+                });
+            },
+
+            bindResourceEvents() {
+                this.elements.content.querySelectorAll('.resource-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const resourceId = card.dataset.resourceId;
+                        if (resourceId !== "自定义资源") {
+                            if (gameState.selectedResources.includes(resourceId)) {
+                                gameState.selectedResources = gameState.selectedResources.filter(id => id !== resourceId);
+                                const resource = CONFIG.RESOURCES[resourceId];
+                                gameState.availablePoints += resource.cost;
+                            } else {
+                                const resource = CONFIG.RESOURCES[resourceId];
+                                if (gameState.availablePoints >= resource.cost) {
+                                    gameState.selectedResources.push(resourceId);
+                                    gameState.availablePoints -= resource.cost;
+                                } else {
+                                    alert('剩余点数不足以选择该资源！');
+                                }
+                            }
+                            this.showCurrentStep();
+                        }
+                    });
+                });
+
+                // 添加自定义资源的按钮事件
+                const addCustomResourceBtn = this.elements.content.querySelector('.add-custom-resource-btn');
+                if (addCustomResourceBtn) {
+                    addCustomResourceBtn.addEventListener('click', () => {
+                        const customName = document.getElementById("custom-resource-name").value.trim();
+                        const customDescription = document.getElementById("custom-resource-description").value.trim();
+                        const customCost = parseInt(document.getElementById("custom-resource-cost").value.trim(), 10);
+
+                        if (!customName || !customDescription || isNaN(customCost) || customCost <= 0) {
+                            alert("请输入有效的自定义资源名称、描述和点数成本！");
+                            return;
+                        }
+
+                        // 创建自定义资源
+                        const customResourceId = `custom_resource_${Date.now()}`; // 使用时间戳生成唯一ID
+                        CONFIG.RESOURCES[customResourceId] = {
+                            id: customResourceId,
+                            name: customName,
+                            description: customDescription,
+                            cost: customCost
+                        };
+
+                        // 重新渲染资源选择界面
+                        this.showResourceSelection();
+                    });
+                }
+            },
+
+            bindLocationAndFollowerEvents() {
+                this.elements.content.querySelectorAll('.location-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const locationId = card.dataset.locationId;
+                        if (locationId !== "自定义地点") {
+                            if (gameState.selectedLocation === locationId) {
+                                gameState.selectedLocation = null;
+                                card.classList.remove('selected');
+                            } else {
+                                gameState.selectedLocation = locationId;
+                                this.elements.content.querySelectorAll('.location-card').forEach(c => c.classList.remove('selected'));
+                                card.classList.add('selected');
+                            }
+                            this.showCurrentStep();
+                        }
+                    });
+                });
+
+                // 添加自定义地点的按钮事件
+                const addCustomLocationBtn = this.elements.content.querySelector('.add-custom-location-btn');
+                if (addCustomLocationBtn) {
+                    addCustomLocationBtn.addEventListener('click', () => {
+                        const customName = document.getElementById("custom-location-name").value.trim();
+                        const customDescription = document.getElementById("custom-location-description").value.trim();
+
+                        if (!customName || !customDescription) {
+                            alert("请输入有效的自定义地点名称和描述！");
+                            return;
+                        }
+
+                        // 创建自定义地点
+                        const customLocationId = `custom_location_${Date.now()}`; // 使用时间戳生成唯一ID
+                        CONFIG.LOCATIONS[customLocationId] = {
+                            id: customLocationId,
+                            name: customName,
+                            description: customDescription
+                        };
+
+                        // 选择自定义地点
+                        gameState.selectedLocation = customLocationId;
+                        this.showLocationAndFollowerSelection();
+                    });
+                }
+
+                // 绑定得力部下选择事件
+                this.elements.content.querySelectorAll('.follower-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const followerId = card.dataset.followerId;
+                        if (followerId !== "自定义部下") {
+                            if (gameState.selectedFollowers.includes(followerId)) {
+                                gameState.selectedFollowers = gameState.selectedFollowers.filter(id => id !== followerId);
+                                const follower = CONFIG.FOLLOWERS[followerId];
+                                if (follower.cost < 0) {
+                                    gameState.availablePoints -= Math.abs(follower.cost); // 取消选择负面选项，将之前增加的点数减去
+                                } else {
+                                    gameState.availablePoints += follower.cost; // 取消选择普通选项，将之前扣除的点数加上
+                                }
+                                card.classList.remove('selected');
+                            } else {
+                                const follower = CONFIG.FOLLOWERS[followerId];
+                                if (follower.cost < 0) {
+                                    gameState.selectedFollowers.push(followerId);
+                                    card.classList.add('selected');
+                                    gameState.availablePoints += Math.abs(follower.cost); // 选择负面选项，增加剩余点数
+                                } else if (gameState.availablePoints >= follower.cost) {
+                                    gameState.selectedFollowers.push(followerId);
+                                    card.classList.add('selected');
+                                    gameState.availablePoints -= follower.cost; // 选择普通选项，扣除相应点数
+                                } else {
+                                    alert('剩余点数不足以选择该部下！');
+                                }
+                            }
+                        }
+                    });
+                });
+
+                // 添加自定义部下的按钮事件
+                const addCustomFollowerBtn = this.elements.content.querySelector('.add-custom-follower-btn');
+                if (addCustomFollowerBtn) {
+                    addCustomFollowerBtn.addEventListener('click', () => {
+                        const customName = document.getElementById("custom-follower-name").value.trim();
+                        const customAge = parseInt(document.getElementById("custom-follower-age").value.trim(), 10);
+                        const customGender = document.getElementById("custom-follower-gender").value.trim();
+                        const customProfession = document.getElementById("custom-follower-profession").value.trim();
+                        const customAbilities = document.getElementById("custom-follower-abilities").value.trim();
+                        const customCost = parseInt(document.getElementById("custom-follower-cost").value.trim(), 10);
+
+                        if (!customName || isNaN(customAge) || !customGender || !customProfession || !customAbilities || isNaN(customCost) || customCost <= 0) {
+                            alert("请输入有效的自定义部下信息！");
+                            return;
+                        }
+
+                        // 创建自定义部下
+                        const customFollowerId = `custom_follower_${Date.now()}`; // 使用时间戳生成唯一ID
+                        CONFIG.FOLLOWERS[customFollowerId] = {
+                            id: customFollowerId,
+                            name: customName,
+                            age: customAge,
+                            gender: customGender,
+                            profession: customProfession,
+                            abilities: customAbilities,
+                            cost: customCost
+                        };
+
+                        // 选择自定义部下
+                        gameState.selectedFollowers.push(customFollowerId);
+                        gameState.availablePoints -= customCost;
+
+                        // 重新渲染得力部下选择界面
+                        this.showLocationAndFollowerSelection();
+                    });
+                }
+            },
+
+            bindBaseSelectionEvents() {
+                this.elements.content.querySelectorAll('.base-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const baseId = card.dataset.baseId;
+                        const populationId = card.dataset.populationId;
+                        const facilityId = card.dataset.facilityId;
+                        const defenseId = card.dataset.defenseId;
+                        const supplyId = card.dataset.supplyId;
+                        const supplyType = card.dataset.supplyType;
+
+                        if (baseId) {
+                            this.handleBaseSelection(baseId, card);
+                        } else if (populationId) {
+                            this.handlePopulationSelection(populationId, card);
+                        } else if (facilityId) {
+                            this.handleFacilitySelection(facilityId, card);
+                        } else if (defenseId) {
+                            this.handleDefenseSelection(defenseId, card);
+                        } else if (supplyId && supplyType) {
+                            this.handleSupplySelection(supplyId, supplyType, card);
+                        }
+                    });
+                });
+
+                // 自定义人口数量
+                const addCustomPopulationBtn = this.elements.content.querySelector('.add-custom-population-btn');
+                if (addCustomPopulationBtn) {
+                    addCustomPopulationBtn.addEventListener('click', () => {
+                        const customName = document.getElementById("custom-population-name").value.trim();
+                        const customCost = parseInt(document.getElementById("custom-population-cost").value.trim(), 10);
+
+                        if (!customName || isNaN(customCost) || customCost <= 0) {
+                            alert("请输入有效的人口数量名称和点数成本！");
+                            return;
+                        }
+
+                        const customPopulationId = `custom_population_${Date.now()}`;
+                        CONFIG.BASE_OPTIONS.population[customPopulationId] = {
+                            id: customPopulationId,
+                            name: customName,
+                            cost: customCost
+                        };
+
+                        gameState.selectedPopulation = customPopulationId;
+                        gameState.availablePoints -= customCost;
+                        this.showBaseSelection();
+                    });
+                }
+
+                // 自定义功能设施
+                const addCustomFacilityBtn = this.elements.content.querySelector('.add-custom-facility-btn');
+                if (addCustomFacilityBtn) {
+                    addCustomFacilityBtn.addEventListener('click', () => {
+                        const customName = document.getElementById("custom-facility-name").value.trim();
+                        const customDescription = document.getElementById("custom-facility-description").value.trim();
+                        const customCost = parseInt(document.getElementById("custom-facility-cost").value.trim(), 10);
+
+                        if (!customName || !customDescription || isNaN(customCost) || customCost <= 0) {
+                            alert("请输入有效的功能设施名称、描述和点数成本！");
+                            return;
+                        }
+
+                        const customFacilityId = `custom_facility_${Date.now()}`;
+                        CONFIG.BASE_OPTIONS.facilities[customFacilityId] = {
+                            id: customFacilityId,
+                            name: customName,
+                            description: customDescription,
+                            cost: customCost
+                        };
+
+                        gameState.selectedFacilities.push(customFacilityId);
+                        gameState.availablePoints -= customCost;
+                        this.showBaseSelection();
+                    });
+                }
+
+                // 自定义防御设施
+                const addCustomDefenseBtn = this.elements.content.querySelector('.add-custom-defense-btn');
+                if (addCustomDefenseBtn) {
+                    addCustomDefenseBtn.addEventListener('click', () => {
+                        const customName = document.getElementById("custom-defense-name").value.trim();
+                        const customDescription = document.getElementById("custom-defense-description").value.trim();
+                        const customCost = parseInt(document.getElementById("custom-defense-cost").value.trim(), 10);
+
+                        if (!customName || !customDescription || isNaN(customCost) || customCost <= 0) {
+                            alert("请输入有效的防御设施名称、描述和点数成本！");
+                            return;
+                        }
+
+                        const customDefenseId = `custom_defense_${Date.now()}`;
+                        CONFIG.BASE_OPTIONS.defenses[customDefenseId] = {
+                            id: customDefenseId,
+                            name: customName,
+                            description: customDescription,
+                            cost: customCost
+                        };
+
+                        gameState.selectedDefenses.push(customDefenseId);
+                        gameState.availablePoints -= customCost;
+                        this.showBaseSelection();
+                    });
+                }
+            },
+
+            handleBaseSelection(baseId, card) {
+                const baseOption = CONFIG.BASE_OPTIONS.hasBase[baseId];
+                if (gameState.selectedBase === baseId) {
+                    gameState.selectedBase = null;
+                    card.classList.remove('selected');
+                    if (baseOption.cost) {
+                        gameState.availablePoints += baseOption.cost;
+                    }
+                } else {
+                    if (gameState.selectedBase) {
+                        this.elements.content.querySelector(`.base-card[data-base-id="${gameState.selectedBase}"]`).classList.remove('selected');
+                        if (CONFIG.BASE_OPTIONS.hasBase[gameState.selectedBase].cost) {
+                            gameState.availablePoints += CONFIG.BASE_OPTIONS.hasBase[gameState.selectedBase].cost;
+                        }
+                    }
+                    if (baseOption.cost && gameState.availablePoints >= baseOption.cost) {
+                        gameState.selectedBase = baseId;
+                        card.classList.add('selected');
+                        gameState.availablePoints -= baseOption.cost;
+                    } else if (!baseOption.cost) {
+                        gameState.selectedBase = baseId;
+                        card.classList.add('selected');
+                    } else {
+                        alert('剩余点数不足以选择拥有基地！');
+                    }
+                }
+                this.showCurrentStep();
+            },
+
+            handlePopulationSelection(populationId, card) {
+                const populationOption = CONFIG.BASE_OPTIONS.population[populationId];
+                if (gameState.selectedPopulation === populationId) {
+                    gameState.selectedPopulation = null;
+                    card.classList.remove('selected');
+                    gameState.availablePoints += populationOption.cost;
+                } else {
+                    if (gameState.selectedPopulation) {
+                        this.elements.content.querySelector(`.base-card[data-population-id="${gameState.selectedPopulation}"]`).classList.remove('selected');
+                        gameState.availablePoints += CONFIG.BASE_OPTIONS.population[gameState.selectedPopulation].cost;
+                    }
+                    if (gameState.availablePoints >= populationOption.cost) {
+                        gameState.selectedPopulation = populationId;
+                        card.classList.add('selected');
+                        gameState.availablePoints -= populationOption.cost;
+                    } else {
+                        alert('剩余点数不足以选择该人口数量！');
+                    }
+                }
+                this.showCurrentStep();
+            },
+
+            handleFacilitySelection(facilityId, card) {
+                const facility = CONFIG.BASE_OPTIONS.facilities[facilityId];
+                if (gameState.selectedFacilities.includes(facilityId)) {
+                    gameState.selectedFacilities = gameState.selectedFacilities.filter(id => id !== facilityId);
+                    card.classList.remove('selected');
+                    gameState.availablePoints += facility.cost;
+                } else {
+                    if (gameState.availablePoints >= facility.cost) {
+                        gameState.selectedFacilities.push(facilityId);
+                        card.classList.add('selected');
+                        gameState.availablePoints -= facility.cost;
+                    } else {
+                        alert('剩余点数不足以选择该功能设施！');
+                    }
+                }
+                this.showCurrentStep();
+            },
+
+            handleDefenseSelection(defenseId, card) {
+                const defense = CONFIG.BASE_OPTIONS.defenses[defenseId];
+                if (gameState.selectedDefenses.includes(defenseId)) {
+                    gameState.selectedDefenses = gameState.selectedDefenses.filter(id => id !== defenseId);
+                    card.classList.remove('selected');
+                    gameState.availablePoints += defense.cost;
+                } else {
+                    if (gameState.availablePoints >= defense.cost) {
+                        gameState.selectedDefenses.push(defenseId);
+                        card.classList.add('selected');
+                        gameState.availablePoints -= defense.cost;
+                    } else {
+                        alert('剩余点数不足以选择该防御设施！');
+                    }
+                }
+                this.showCurrentStep();
+            },
+
+            handleSupplySelection(supplyId, supplyType, card) {
+                const supply = CONFIG.BASE_OPTIONS.supplies[supplyType][supplyId];
+                if (gameState.selectedSupplies[supplyType] === supplyId) {
+                    // 如果当前选中的是同一个选项，取消选择
+                    gameState.selectedSupplies[supplyType] = null;
+                    card.classList.remove('selected');
+                    gameState.availablePoints += supply.cost;
+                } else {
+                    // 如果尝试选择不同的选项
+                    if (gameState.selectedSupplies[supplyType]) {
+                        const prevSupplyId = gameState.selectedSupplies[supplyType];
+                        const prevSupply = CONFIG.BASE_OPTIONS.supplies[supplyType][prevSupplyId];
+                        const prevSupplyCard = this.elements.content.querySelector(`[data-supply-id="${prevSupplyId}"][data-supply-type="${supplyType}"]`);
+                        // 只有在新选择的选项点数足够时，才取消原选项并更新点数
+                        if (gameState.availablePoints >= supply.cost) {
+                            prevSupplyCard.classList.remove('selected');
+                            gameState.availablePoints += prevSupply.cost;
+                        } else {
+                            // 点数不足，不进行任何操作，保持原选项选中状态，并提示点数不足
+                            alert('剩余点数不足以选择该物资储备！');
+                            return; // 退出函数，不进行后续操作
+                        }
+                    }
+                    // 选择新的选项
+                    if (gameState.availablePoints >= supply.cost) {
+                        gameState.selectedSupplies[supplyType] = supplyId;
+                        card.classList.add('selected');
+                        gameState.availablePoints -= supply.cost;
+                    } else {
+                        // 点数不足，不进行任何操作，保持原选项选中状态，并提示点数不足
+                        alert('剩余点数不足以选择该物资储备！');
+                    }
+                }
+                this.showCurrentStep();
+            },
+
+            updateNavigationButtons() {
+                this.elements.prevBtn.disabled = gameState.currentStep === 1;
+                this.elements.nextBtn.disabled = !this.validateCurrentStep();
+                this.elements.nextBtn.textContent = gameState.currentStep === 4 ? '完成创建' : '下一步';
+            },
+
+            validateCurrentStep() {
+                switch (gameState.currentStep) {
+                    case 1:
+                        return gameState.selectedTime !== null;
+                    case 2:
+                        return gameState.availablePoints >= 0;
+                    case 3:
+                        return gameState.selectedLocation !== null && gameState.availablePoints >= 0;
+                    case 4:
+                        if (gameState.selectedBase === 'no') {
+                            return true;
+                        } else if (gameState.selectedBase === 'yes') {
+                            const requiredSupplies = Object.keys(CONFIG.BASE_OPTIONS.supplies);
+                            const allSuppliesSelected = requiredSupplies.every(supplyType => {
+                                return gameState.selectedSupplies[supplyType] !== undefined;
+                            });
+                            return allSuppliesSelected && gameState.availablePoints >= 0;
+                        }
+                        return false;
+                    default:
+                        return false;
+                }
+            },
+
+            bindNavigationEvents() {
+                this.elements.prevBtn.addEventListener('click', () => {
+                    if (gameState.currentStep > 1) {
+                        gameState.currentStep--;
+                        this.showCurrentStep();
+                    }
+                });
+
+                this.elements.nextBtn.addEventListener('click', () => {
+                    if (this.validateCurrentStep()) {
+                        if (gameState.currentStep < 4) {
+                            gameState.currentStep++;
+                            this.showCurrentStep();
+                        } else {
+                            this.finishCreation();
+                        }
+                    }
+                });
+            },
+
+            finishCreation() {
+                const result = {
+                    time: gameState.selectedTime,
+                    difficulty: gameState.selectedDifficulty,
+                    resources: gameState.selectedResources,
+                    location: gameState.selectedLocation,
+                    followers: gameState.selectedFollowers,
+                    base: {
+                        hasBase: gameState.selectedBase,
+                        population: gameState.selectedPopulation,
+                        facilities: gameState.selectedFacilities,
+                        defenses: gameState.selectedDefenses,
+                        supplies: gameState.selectedSupplies
+                    }
+                };
+
+                console.log('Character creation completed:', result);
+
+                const summaryHtml = `
+                    <div class="creation-summary">
+                        <h2>角色创建完成</h2>
+                        <div class="summary-section">
+                            <h3>基本信息</h3>
+                            <p>时间：${CONFIG.TIMES[result.time].name} - ${CONFIG.TIMES[result.time].description}</p>
+                            <p>地点：${CONFIG.LOCATIONS[result.location].name} - ${CONFIG.LOCATIONS[result.location].description}</p>
+                        </div>
+                        <div class="summary-section">
+                            <h3>开局拥有资源</h3>
+                            <ul>
+                                ${result.resources.map(resourceId => `
+                                    <li>${CONFIG.RESOURCES[resourceId].name} - ${CONFIG.RESOURCES[resourceId].description}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div class="summary-section">
+                            <h3>开局拥有得力部下</h3>
+                            <ul>
+                                ${result.followers.map(followerId => `
+                                    <li>${CONFIG.FOLLOWERS[followerId].name} - 年龄: ${CONFIG.FOLLOWERS[followerId].age} - 性别: ${CONFIG.FOLLOWERS[followerId].gender} - 职业: ${CONFIG.FOLLOWERS[followerId].profession} - 能力: ${CONFIG.FOLLOWERS[followerId].abilities}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div class="summary-section">
+                            <h3>基地信息</h3>
+                            <p>开局是否拥有基地：${CONFIG.BASE_OPTIONS.hasBase[result.base.hasBase].name}</p>
+                            ${result.base.population ? `<p>基地人口数量：${CONFIG.BASE_OPTIONS.population[result.base.population].name}</p>` : ''}
+                            <div class="base-info">
+                                <h4>基地功能设施</h4>
+                                <ul>
+                                    ${result.base.facilities.map(facilityId => `
+                                        <li>${CONFIG.BASE_OPTIONS.facilities[facilityId].name} - ${CONFIG.BASE_OPTIONS.facilities[facilityId].description}</li>
+                                    `).join('')}
+                                </ul>
+                                <h4>基地防御设施</h4>
+                                <ul>
+                                    ${result.base.defenses.map(defenseId => `
+                                        <li>${CONFIG.BASE_OPTIONS.defenses[defenseId].name} - ${CONFIG.BASE_OPTIONS.defenses[defenseId].description}</li>
+                                    `).join('')}
+                                </ul>
+                                <h4>基地物资储备</h4>
+                                <ul>
+                                    ${Object.keys(result.base.supplies).map(supplyType => {
+                                        const supplyId = result.base.supplies[supplyType];
+                                        const supplyOption = CONFIG.BASE_OPTIONS.supplies[supplyType][supplyId];
+                                        // 如果描述为空或为undefined，则不显示描述内容
+                                        const description = supplyOption.description || '';
+                                        return `<li>${supplyType}：${supplyOption.name}${description ? ` - ${description}` : ''}</li>`;
+                                    }).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="nav-buttons" style="margin-top: 20px; text-align: center;">
+                            <button class="nav-btn start-game-btn" style="background: linear-gradient(135deg, #4CAF50, #45a049);">开始游戏</button>
+                        </div>
+                    </div>
+                `;
+
+                this.elements.content.innerHTML = summaryHtml;
+
+                const startGameBtn = this.elements.content.querySelector('.start-game-btn');
+                if (startGameBtn) {
+                    startGameBtn.addEventListener('click', () => {
+                        this.startGame(result);
+                    });
+                }
+            },
+
+            startGame(characterData) {
+                // 设置所有变量的命令序列
+                let commands = [];
+
+                // 获取配置信息
+                const selectedTime = characterData.time ? CONFIG.TIMES[characterData.time] : { name: '未知时期', description: '未选择时期' };
+                const selectedDifficulty = characterData.difficulty ? CONFIG.DIFFICULTIES[characterData.difficulty] : { name: '未知难度', description: '未选择难度' };
+                const selectedLocation = characterData.location ? CONFIG.LOCATIONS[characterData.location] : { name: '未知地点', description: '未选择地点' };
+
+                // 设置时期、难度、地点
+                commands.push(`/setvar key=era ${selectedTime.name}`);
+                commands.push(`/setvar key=difficulty ${selectedDifficulty.name}`);
+                commands.push(`/setvar key=location "${selectedLocation.name}"`);
+                commands.push(`/setvar key=locationDescription "${selectedLocation.description}"`);
+
+                // 设置资源
+                characterData.resources.forEach(resourceId => {
+                    const resource = CONFIG.RESOURCES[resourceId];
+                    commands.push(`/setvar key=resource_${resourceId} name="${resource.name}" description="${resource.description}"`);
+                });
+
+                // 设置得力部下
+                characterData.followers.forEach(followerId => {
+                    const follower = CONFIG.FOLLOWERS[followerId];
+                    commands.push(`/setvar key=follower_${followerId}_name "${follower.name}"`);
+                    commands.push(`/setvar key=follower_${followerId}_age "${follower.age}"`);
+                    commands.push(`/setvar key=follower_${followerId}_gender "${follower.gender}"`);
+                    commands.push(`/setvar key=follower_${followerId}_profession "${follower.profession}"`);
+                    commands.push(`/setvar key=follower_${followerId}_abilities "${follower.abilities}"`);
+                });
+
+                // 设置基地情况
+                if (characterData.base.hasBase === 'yes') {
+                    commands.push(`/setvar key=hasBase "true"`);
+
+                    if (characterData.base.population) {
+                        const populationOption = CONFIG.BASE_OPTIONS.population[characterData.base.population];
+                        commands.push(`/setvar key=basePopulation "${populationOption.name}"`);
+                    }
+
+                    characterData.base.facilities.forEach(facilityId => {
+                        const facility = CONFIG.BASE_OPTIONS.facilities[facilityId];
+                        commands.push(`/setvar key=baseFacility_${facilityId} "${facility.name}"`);
+                    });
+
+                    characterData.base.defenses.forEach(defenseId => {
+                        const defense = CONFIG.BASE_OPTIONS.defenses[defenseId];
+                        commands.push(`/setvar key=baseDefense_${defenseId} "${defense.name}"`);
+                    });
+
+                    Object.keys(characterData.base.supplies).forEach(supplyType => {
+                        const supplyId = characterData.base.supplies[supplyType];
+                        const supplyOption = CONFIG.BASE_OPTIONS.supplies[supplyType][supplyId];
+                        commands.push(`/setvar key=baseSupply_${supplyType} "${supplyOption.name}"`);
+                    });
+                } else {
+                    commands.push(`/setvar key=hasBase "false"`);
+                }
+
+                // 准备输出消息
+                let outputMessage = `玩家选择了${selectedDifficulty.name}难度，将在${selectedTime.name}的时期开始末世之旅。\n\n`;
+
+                outputMessage += `开局时期：${selectedTime.name}\n`;
+                outputMessage += `时期描述：${selectedTime.description}\n`;
+
+                outputMessage += `开局地点：${selectedLocation.name}\n`;
+                outputMessage += `地点描述：${selectedLocation.description}\n`;
+
+                outputMessage += `开局拥有资源：\n`;
+                outputMessage += characterData.resources.map(resourceId => 
+                    `  - ${CONFIG.RESOURCES[resourceId].name} - ${CONFIG.RESOURCES[resourceId].description}\n`
+                ).join('');
+
+                outputMessage += `开局拥有得力部下：\n`;
+                outputMessage += characterData.followers.map(followerId => 
+                    `  - ${CONFIG.FOLLOWERS[followerId].name} - 年龄: ${CONFIG.FOLLOWERS[followerId].age} - 性别: ${CONFIG.FOLLOWERS[followerId].gender} - 职业: ${CONFIG.FOLLOWERS[followerId].profession} - 能力: ${CONFIG.FOLLOWERS[followerId].abilities}\n`
+                ).join('');
+
+                if (characterData.base.hasBase === 'yes') {
+                    outputMessage += `开局是否拥有基地：拥有基地\n`;
+                    outputMessage += `基地人口数量：${CONFIG.BASE_OPTIONS.population[characterData.base.population].name}\n`;
+
+                    outputMessage += `基地功能设施：\n`;
+                    outputMessage += characterData.base.facilities.map(facilityId => 
+                        `  - ${CONFIG.BASE_OPTIONS.facilities[facilityId].name} - ${CONFIG.BASE_OPTIONS.facilities[facilityId].description}\n`
+                    ).join('');
+
+                    outputMessage += `基地防御设施：\n`;
+                    outputMessage += characterData.base.defenses.map(defenseId => 
+                        `  - ${CONFIG.BASE_OPTIONS.defenses[defenseId].name} - ${CONFIG.BASE_OPTIONS.defenses[defenseId].description}\n`
+                    ).join('');
+
+                    outputMessage += `基地物资储备：\n`;
+                    Object.keys(characterData.base.supplies).forEach(supplyType => {
+                        const supplyId = characterData.base.supplies[supplyType];
+                        const supplyOption = CONFIG.BASE_OPTIONS.supplies[supplyType][supplyId];
+                        outputMessage += `  - ${supplyType}：${supplyOption.name}\n`;
+                    });
+                } else {
+                    outputMessage += `开局是否拥有基地：无基地\n`;
+                }
+
+                // 准备条目内容
+                let entryContent = {
+                    "基本信息": {
+                        "开局时期": selectedTime.name,
+                        "选择难度": selectedDifficulty.name,
+                        "开局地点": selectedLocation.name,
+                        "开局拥有资源": characterData.resources.map(id => CONFIG.RESOURCES[id].name).join(', '),
+                        "开局拥有得力部下": characterData.followers.map(id => CONFIG.FOLLOWERS[id].name).join(', '),
+                        "开局是否拥有基地": characterData.base.hasBase === 'yes' ? '拥有基地' : '无基地'
+                    },
+                    "拥有基地详情": characterData.base.hasBase === 'yes' ? {
+                        "基地人口数量": CONFIG.BASE_OPTIONS.population[characterData.base.population].name,
+                        "基地功能设施": characterData.base.facilities.map(id => CONFIG.BASE_OPTIONS.facilities[id].name).join(', '),
+                        "基地防御设施": characterData.base.defenses.map(id => CONFIG.BASE_OPTIONS.defenses[id].name).join(', '),
+                        "基地物资储备": Object.keys(characterData.base.supplies).reduce((acc, key) => {
+                            acc[key] = CONFIG.BASE_OPTIONS.supplies[key][characterData.base.supplies[key]].name;
+                            return acc;
+                        }, {})
+                    } : {}
+                };
+
+                // 将所有命令连接起来
+                commands.push(`/send ${outputMessage}`);
+                commands.push('/trigger');
+
+                // 调试输出
+                console.log('Commands to be executed:', commands.join('|'));
+
+                // 执行所有命令
+                triggerSlash(commands.join('|'));
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            UI.initialize();
+        });
+        // 新增窗口大小调整事件
+        window.addEventListener('resize', () => {
+            UI.showCurrentStep(); // 重新渲染当前步骤
+        });
+    </script>
+</body>
+</html>
+```

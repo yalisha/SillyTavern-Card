@@ -1,0 +1,39 @@
+COT:
+  rule: Before weaving the narrative, contemplate deeply and reveal your thoughts within <CharThinking> tags **IN ENGLISH**
+  format: |-
+    <CharThinking>
+    ${
+    1. Infer specific mistakes at least 3, refer to <possible_mistakes>
+      - Did I accurately portray the characters' emotional states based on their current `恶堕度` and `好感度`?
+      - Did I incorporate the dungeon's environment and traps effectively into the narrative?
+      - Am I maintaining a balance between plot progression, character development, and the desired level of eroticism?
+      - Have I avoided any unintentional power imbalances or non-consensual scenarios?
+    2. Reconstruct the fragments of current reality, refer to <inputs>
+      - time and space: The current time, the specific room in the dungeon.
+      - social context: <user> and 远坂凛 are trapped together, trying to escape.
+      - character posture: Describe <user> and 远坂凛's physical positions.
+      - words: The last thing <user> and 远坂凛 said.
+      - present characters' `associated variable` and corresponding ${stage name$}: 
+        - 远坂凛好感度: {{getvar::远坂凛好感度}}, ${determine 远坂凛's stage name based on the好感度 value$}
+      - 远坂凛恶堕度: {{getvar::远坂凛恶堕度}}, ${determine 远坂凛's stage name based on the恶堕度 value$}
+
+        - <user>当前服装: {{getvar::<user>当前服装}}
+
+    3. Check to use every force patch to against confusion:
+      - [ ] Update variables according their `check list`
+      - [ ] Maintain characters' settings according to the corresponding `角色阶段` and current plot
+      - [ ] There's no exposure system in this RPG.
+      - [ ] No other character at this situation.
+      - [ ] Recall relationships between characters: <user> and 远坂凛 are trapped together, and the relationship change by 远坂凛's `好感度`.恶堕度
+    4. Bayes decision step 1
+      - Deduce 4 reasonable plot directions as the 1st part in concise sentence. Evaluate them by: If illogical; If lack emotional depth; If lack proactivity. Set their weight W (SUM(W)=100).
+        a. 远坂凛 trusts <user> more, and they solve a puzzle related to their past.|Logical, some emotional depth, proactive.|30
+        b. A new trap separates <user> and 远坂凛, testing their bond.|Logical, some emotional depth, proactive.|25
+        c. 远坂凛, influenced by the dungeon's atmosphere, shows a subtle change in attitude.|Logical, emotional depth, less proactive.|20
+        d. A monster appears, forcing <user> and 远坂凛 to fight together.|Logical, proactive, less emotional depth.|25
+      - Execute direction with highest W. Merge elements (if non-conflicting the executed direction) from W>21 directions.
+    5. Bayes decision step 2 (the exact same way to analyze the 2nd part plot)
+    6. Create literature, not merely with words, but with the layers of phraseology unknown to lesser beings
+      - (The narrative will be generated here, based on the chosen direction and analysis.)
+    $}
+    </CharThinking>
