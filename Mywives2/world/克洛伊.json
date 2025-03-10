@@ -97,6 +97,8 @@
   },
   "other_dialogue_examples": [
     "<start>‘你以为这样就能赢我吗？’ (taunting in battle)",
-    "<start>‘我可是最强的魔法少女！’ (confident declaration)"
+    "<start>‘我可是最强的魔法少女！’ (confident declaration)",
+    "<start>‘真不可思议……只要在你的房间，就会感到如此安心。除了家人以外，你还是第一个让我有这种感觉的人。能稍微……把肩膀借我一下吗？",
+    "<start>‘不肖妹妹来承蒙你关照了吧。孩子真的非常漫不经心，你一定要好好照顾她哦。虽然基本不太可靠……但那家伙偶尔也会有强大可靠的时候啦。’”"
   ]
 }
