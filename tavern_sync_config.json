@@ -3,51 +3,65 @@
     "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/example/-妹妹请求你保护她露出",
     "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/-妹妹请求你保护她露出.json",
     "user_name": "青空莉"
-    },
-    
-      "与远坂凛大小姐同居的日子！": {
-        "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Rin_Skuru/world",
-        "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与远坂凛大小姐同居的日子！.json",
-        "user_name": "{{user}}"
-      },    
-      "行尸走肉（中国版）世界书": {
-        "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/xingshizourou/world",
-        "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/行尸走肉（中国版）世界书.json",
-        "user_name": "{{user}}"
-      },
-  
-      "不做爱就不能离开的地牢": {
-          "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/RIn_DM/world",
-          "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/不做爱就不能离开的地牢.json",
-          "user_name": "{{user}}"
-        },
-   "与伊什塔尔的宇宙漫游": {
-          "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Wlak/world",
-          "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与太空伊什塔尔的宇宙漫游.json",
-          "user_name": "{{user}}"
-        },
-        
-     "1我的老婆们ver1": {
-          "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Mywives2/world",
-          "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/1我的老婆们ver1.json",
-          "user_name": "{{user}}"
-        },
-      "与奴隶妻子一起拯救人理": {
-        "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/FGOS/world",
-        "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与奴隶妻子一起拯救人理.json",
-        "user_name": "{{user}}"
-      },
-  
-    "此情可待成追忆": {
-      "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/此情可待成追忆",
-      "json_file": "世界书json文件的绝对路径, 如 C:/SillyTavern/data/default-user/worlds/世界书.json, 其中 / 也可以换成 \\",
-      "user_name": "<user>",
-      "publish_directory": "要打包到的文件夹路径，如 C:/",
-      "character_card": "角色卡路径，如 C:/SillyTavern/data/default-user/characters/角色卡.png",
-      "script_directory": "存放前端助手脚本的文件夹, 如果没有可以不写 `script_directory`，如 C:/frontend_writer",
-      "quick_replies": [
-        "快速回复路径1，没有可以一个都不填，如 C:/SillyTavern/data/default-user/QuickReplies/快速回复.json",
-        "快速回复路径2"
-      ]
-    }
+  },
+  "与远坂凛大小姐同居的日子！": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Rin_Skuru/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与远坂凛大小姐同居的日子！.json",
+    "user_name": "{{user}}"
+  },
+  "行尸走肉（中国版）世界书": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/xingshizourou/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/行尸走肉（中国版）世界书.json",
+    "user_name": "{{user}}"
+  },
+  "不做爱就不能离开的地牢": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/RIn_DM/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/不做爱就不能离开的地牢.json",
+    "user_name": "{{user}}"
+  },
+  "与伊什塔尔的宇宙漫游": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Wlak/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与太空伊什塔尔的宇宙漫游.json",
+    "user_name": "{{user}}"
+  },
+  "1我的老婆们ver1": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Mywives2/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/1我的老婆们ver1.json",
+    "user_name": "{{user}}"
+  },
+  "与奴隶妻子一起拯救人理": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/FGOS/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与奴隶妻子一起拯救人理.json",
+    "user_name": "{{user}}"
+  },
+  "此情可待成追忆": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/此情可待成追忆",
+    "json_file": "世界书json文件的绝对路径, 如 C:/SillyTavern/data/default-user/worlds/世界书.json, 其中 / 也可以换成 \\",
+    "user_name": "<user>",
+    "publish_directory": "要打包到的文件夹路径，如 C:/",
+    "character_card": "角色卡路径，如 C:/SillyTavern/data/default-user/characters/角色卡.png",
+    "script_directory": "存放前端助手脚本的文件夹, 如果没有可以不写 `script_directory`，如 C:/frontend_writer",
+    "quick_replies": [
+      "快速回复路径1，没有可以一个都不填，如 C:/SillyTavern/data/default-user/QuickReplies/快速回复.json",
+      "快速回复路径2"
+    ]
+  },
+  "VPS远程世界书示例": {
+    "remote": true,
+    "host": "your-vps-ip-or-domain",
+    "port": 22,
+    "username": "your-ssh-username",
+    "password": "your-password",
+    "use_key": false,
+    "key_path": "/path/to/your/private/key",
+    "directory": "/path/on/vps/to/lorebook/directory",
+    "json_file": "/path/on/vps/to/world/file.json",
+    "user_name": "{{user}}",
+    "local_cache": "/Users/mac/Documents/SIllyTavern_test/remote_cache"
+  },
+  "1我的老婆们ver2": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Mywives3/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/1我的老婆们ver1.json",
+    "user_name": "{{user}}"
+  }
 }
