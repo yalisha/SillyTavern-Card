@@ -63,5 +63,15 @@
     "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/Mywives3/world",
     "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/1我的老婆们ver1.json",
     "user_name": "{{user}}"
+  },
+  "性奴师姐大小姐师妹与萝莉师尊还有我": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/此情可待成追忆/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/性奴师姐大小姐师妹萝莉师尊还有我.json",
+    "user_name": "<user>"
+  },
+  "视奸公寓": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/视奸公寓/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/视监公寓.json",
+    "user_name": "<user>"
   }
 }
