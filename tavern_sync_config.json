@@ -78,5 +78,10 @@
     "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/弱气少女师尊和强气猫娘弟子的旅行游记/world",
     "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/弱气少女师尊和强气猫娘弟子的旅行游记.json",
     "user_name": "<user>"
+  },
+  "我的老婆们ver2": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/我的老婆们ver2/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/我的老婆们重制版.json",
+    "user_name": "<user>"
   }
 }
