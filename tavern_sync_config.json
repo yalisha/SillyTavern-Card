@@ -30,7 +30,7 @@
     "user_name": "{{user}}"
   },
   "与奴隶妻子一起拯救人理": {
-    "directory": "/Users/mac/Documents/SIllyTavern_test/lorebook_script/FGOS/world",
+    "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/与伊什塔尔和艾蕾一起拯救人理！/world",
     "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/与奴隶妻子一起拯救人理.json",
     "user_name": "{{user}}"
   },
@@ -82,6 +82,16 @@
   "我的老婆们ver2": {
     "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/我的老婆们ver2/world",
     "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/我的老婆们重制版.json",
+    "user_name": "<user>"
+  },
+  "后宫建筑": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/后宫建筑/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/后宫建筑.json",
+    "user_name": "<user>"
+  },
+  "我的老婆们公开版": {
+    "directory": "/Users/mac/Documents/SIllyTavern_test/角色卡/我的老婆们公开版/world",
+    "json_file": "/Users/mac/SillyTavern/data/default-user/worlds/我的老婆们公开版.json",
     "user_name": "<user>"
   }
 }
